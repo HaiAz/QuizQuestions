@@ -26,7 +26,7 @@ function Login() {
                 (e) => e.email === values.email && e.password === values.password
             );
             if (check) {
-                navigate("/Home");
+                navigate("/");
             } else {
                 alert("Usename or password is incorrect!");
             }
@@ -87,7 +87,7 @@ function Login() {
             </div>
             <div className="w-full h-screen bg-white flex items-center justify-center ">
                 <div className="w-1/2 lg:w-[400px] md:w-2/3">
-                    <p className="font-bold text-2xl text-center">Sign in to VNPT</p>
+                    <p className="font-bold text-2xl text-center">Sign in</p>
                     <div className="mt-4 flex justify-center">
                         <button className="bg-[#1a73e8] px-4 py-1 flex items-center justify-around rounded-md hover:bg-blue-400">
                             <Link>

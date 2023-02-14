@@ -8,6 +8,9 @@ module.exports = {
                 Comforter: ["Comforter", "cursive"],
                 OleoScript: ["Oleo Script", "cursive"],
             },
+            colors: {
+                "black-rgba": "rgba(0,0,0,0.4)",
+            },
         },
     },
     plugins: [require("daisyui")],

@@ -1,34 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import SlideShow from "../../components/all/Slider/SlideShow";
 import SubjectSlideShow from "../../components/all/Slider/SubjectSlideShow";
 import Header from "../../components/all/Home/Header";
 import Footer from "../../components/all/Home/Footer";
 import SideBar from "../../components/all/SideBar/SideBar";
-export default function Home() {
-    const [isMobile, setIsMobile] = useState(false);
-    const handleResize = () => {
-        if (window.innerWidth < 768) {
-            setIsMobile(true);
-            console.log(1);
-        } else {
-            setIsMobile(false);
-            console.log(2);
-        }
-    };
-    useEffect(() => {
-        window.addEventListener("resize", handleResize);
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, [isMobile]);
+export default function Home() {
     return (
         <div id="Home" className="w-full min-h-screen relative overflow-hidden">
             <Header />
             <SideBar />
             <SlideShow />
-
             <div className="">
                 <div className="bg-[#4298b4] mt-8">
                     <h1 className="text-white text-4xl font-OleoScript mb-4 text-center pt-4">

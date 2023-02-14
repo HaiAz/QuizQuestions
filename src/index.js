@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
+import Home from "./pages/all/Home";
+import ForgotPassword from "./pages/all/ForgotPassword";
+import SignUp from "./pages/all/SignUp";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./components/all/login/Login";
 
 import TakeTest from "./pages/all/TakeTest";
 
@@ -13,8 +15,8 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/Home" element={<App />} />
+                <Route path="/" element={<App />} />
+                <Route path="/Home" element={<Home />} />
                 <Route path="take-the-test" element={<TakeTest />} />
             </Routes>
         </BrowserRouter>
