@@ -20,7 +20,7 @@ function App() {
     return (
         <div className="App">
             <AppProvider>
-                <Login />
+                <Home />
             </AppProvider>
         </div>
     );
