@@ -6,9 +6,9 @@ import { BsFillMoonFill, BsPeopleFill } from "react-icons/bs";
 import { BiHelpCircle } from "react-icons/bi";
 import { GiMoneyStack } from "react-icons/gi";
 import { GrLogout } from "react-icons/gr";
-// import { useAppContext } from "../../../context/AppProvider";
+import { useAppContext } from "../../../context/AppProvider";
 export default function SideBar() {
-    // const { showMenu, setShowMenu } = useAppContext();
+    const { showMenu, setShowMenu } = useAppContext();
 
     return (
         <div className="">
@@ -16,12 +16,12 @@ export default function SideBar() {
                 // className={`w-[300px] h-screen flex flex-col bg-slate-400 px-5 absolute top-0 right-0 z-20 transform translate-x-96 ${
                 //     showMenu && "translate-x-0"
                 // } transition-all duration-300`}
-                // className={`${
-                //     showMenu
-                //         ? "w-[300px] h-screen flex flex-col bg-slate-200 px-5 absolute top-0 right-0 z-20 transform translate-x-0 transition-all duration-300"
-                //         : "w-[300px] h-screen flex flex-col bg-slate-200 px-5 absolute top-0 right-0 z-20 transform translate-x-96 transition-all duration-300"
-                // }  `}
-                className="w-[300px] h-screen flex flex-col bg-slate-200 px-5 absolute top-0 right-0 z-20 transform translate-x-96 transition-all duration-300"
+                className={`${
+                    showMenu
+                        ? "w-[300px] h-screen flex flex-col bg-slate-200 px-5 absolute top-0 right-0 z-20 transform translate-x-0 transition-all duration-300"
+                        : "w-[300px] h-screen flex flex-col bg-slate-200 px-5 absolute top-0 right-0 z-20 transform translate-x-96 transition-all duration-300"
+                }  `}
+                // className="w-[300px] h-screen flex flex-col bg-slate-200 px-5 absolute top-0 right-0 z-20 transform translate-x-96 transition-all duration-300"
             >
                 <AiFillCloseCircle
                     className="absolute top-8 right-4 w-8 h-8"

@@ -9,13 +9,14 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import TakeTest from "./pages/all/TakeTest";
+import Login from "./pages/all/Login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<App />} />
+                <Route path="/" element={<Login />} />
                 <Route path="/Home" element={<Home />} />
                 <Route path="take-the-test" element={<TakeTest />} />
             </Routes>
