@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import SlideShow from "../../components/all/Slider/SlideShow";
-import SubjectSlideShow from "../../components/all/Slider/SubjectSlideShow";
-import Header from "../../components/all/Home/Header";
-import Footer from "../../components/all/Home/Footer";
-import SideBar from "../../components/all/SideBar/SideBar";
+import SubjectSlideShow from "../../components/Slider/SubjectSlideShow";
+import Header from "../../components/Header/Header";
+import SlideShow from "../../components/Slider/SlideShow";
+import SideBar from "../../components/SideBar/SideBar";
+import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
     return (
@@ -23,7 +22,7 @@ export default function Home() {
                     </h1> */}
                     <div className="bg-[#4298b4] py-4 text-center w-full flex justify-center">
                         <p className="py-4 px-10 rounded-[30px] font-bold bg-[#88619a] text-white">
-                            <Link to="/take-the-test" className="">
+                            <Link to="/user/list-exam" className="">
                                 Take The Test
                             </Link>
                         </p>
@@ -47,7 +46,7 @@ export default function Home() {
                     </div>
                     <div className=" py-4 text-center w-full flex justify-center">
                         <p className="py-4 px-10 rounded-[30px] font-bold bg-[#88619a] text-white">
-                            <Link to="/take-the-test" className="">
+                            <Link to="/quizz" className="">
                                 Take The Test
                             </Link>
                         </p>

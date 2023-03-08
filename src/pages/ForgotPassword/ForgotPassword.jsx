@@ -3,7 +3,7 @@ import { FaGooglePlusG, FaTwitter } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Routes, Route, Link } from "react-router-dom";
-import Login from "./Login";
+import Login from "../Login/Login";
 
 function ForgotPassword() {
     const formik = useFormik({

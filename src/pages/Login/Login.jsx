@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { FaGooglePlusG, FaTwitter } from "react-icons/fa";
+import { AiFillFacebook } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-
+import { Link, useNavigate, useHistory } from "react-router-dom";
+import { GoogleAuthProvider, FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth, db } from "../../firebase/config";
+import { useAuthContext } from "../../context/AuthProvider";
+import { useSelector, useDispatch } from "react-redux";
 function Login() {
-    const provider = new GoogleAuthProvider();
+    const { handleLoginWithGoogle, handleLogout, a } = useAuthContext();
+    const googleProvider = new GoogleAuthProvider();
+    // const fbProvider = new FacebookAuthProvider();
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const [data, setData] = useState([]);
-
-    const API = "https://62a49575259aba8e10eb42f8.mockapi.io/omuji/api";
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -32,37 +35,7 @@ function Login() {
             }
         },
     });
-
-    const auth = getAuth();
-    const googleLogin = () => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-                // IdP data available using getAdditionalUserInfo(result)
-                // ...
-                navigate("/Home");
-            })
-            .catch((error) => {
-                // Handle Errors here.
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // The email of the user's account used.
-                const email = error.customData.email;
-                // The AuthCredential type that was used.
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                // ...
-            });
-    };
-
-    useEffect(() => {
-        fetch(API)
-            .then((res) => res.json())
-            .then((data) => setData(data));
-    }, []);
+    console.log(handleLoginWithGoogle, handleLogout, a);
     return (
         <div className="w-full h-screen flex flex-row relative">
             <p className="absolute top-10 right-10">
@@ -91,11 +64,17 @@ function Login() {
                     <div className="mt-4 flex justify-center">
                         <button className="bg-[#1a73e8] px-4 py-1 flex items-center justify-around rounded-md hover:bg-blue-400">
                             <Link>
-                                <FaGooglePlusG className="text-white" onClick={googleLogin} />
+                                <FaGooglePlusG
+                                    className="text-white text-3xl"
+                                    onClick={handleLoginWithGoogle}
+                                />
                             </Link>
                         </button>
                         <button className="bg-stone-200 hover:bg-stone-300 px-4 py-4 ml-4 rounded-md">
-                            <FaTwitter className="text-gray-500" />
+                            <FaTwitter className="text-gray-500 text-3xl" />
+                        </button>
+                        <button className="bg-stone-200 hover:bg-stone-300 px-4 py-4 ml-4 rounded-md">
+                            <AiFillFacebook className="text-blue-700 text-3xl" />
                         </button>
                     </div>
 

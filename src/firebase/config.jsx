@@ -1,12 +1,11 @@
 // Import the functions you need from the SDKs you need
+// TODO: Add SDKs for Firebase products that you want to use
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
 import { getDatabase } from "firebase/database";
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: "quizquestion-394b2.firebaseapp.com",
@@ -21,4 +20,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-export const database = getDatabase(app);
+const database = getDatabase(app);
+const db = getFirestore(app);
+const auth = getAuth(app);
+export { analytics, database, auth, db };
+export default app;

@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { dataSlider, settingSlideShow } from "./DataSlider";
-import { useWindowSize } from "../../../context/AppProvider";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 export default function SlideShow() {
     const handleResize = useWindowSize();

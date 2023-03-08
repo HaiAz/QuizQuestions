@@ -1,12 +1,11 @@
 import React from "react";
 import { BsFacebook, BsTwitter, BsInstagram, BsYoutube, BsTelegram } from "react-icons/bs";
+import { Link } from "react-router-dom";
 export default function Footer() {
     return (
         <div className="mt-12">
             <div className="flex flex-col items-center justify-center italic text-sky-500 text-[14px]">
-                <a href="#" className="mb-2">
-                    Contact
-                </a>
+                <Link>Contact</Link>
                 <a href="#" className="mb-2">
                     Testimonials
                 </a>
