@@ -13,9 +13,10 @@ export function ProtectedRoute() {
 
     const navigate = useNavigate();
     if (loading) {
-        navigate("/Home");
+        // navigate("/home");
         return;
     } else if (!auth.isLogin) {
+        alert("Bạn phải đăng nhập trước");
         navigate("/login");
         return;
     }
@@ -28,9 +29,10 @@ export function AdminProtectedRoute() {
     const user = useSelector((state) => state.authSlice.user);
     const navigate = useNavigate();
     if (loading) {
-        navigate("/admin");
+        // navigate("/admin");
         return;
     } else if (!auth.isLogin || user.role !== "ADMIN") {
+        alert("Bạn phải đăng nhập trước");
         navigate("/login");
         return;
     }

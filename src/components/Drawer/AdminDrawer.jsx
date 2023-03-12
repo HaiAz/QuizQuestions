@@ -34,13 +34,21 @@ function AdminDrawer() {
                     <ul className="menu menu-compact p-4 w-80 text-base-content sticky">
                         {/* <!-- Sidebar content here --> */}
                         <li className={`${location.pathname === "/" && "active:"}`}>
-                            <Link to="/home">Trang chủ</Link>
+                            <Link className="text-lg" to="/home">
+                                Trang chủ
+                            </Link>
                         </li>
-                        <li className={`${location.pathname === "/add-question" && "active:"}`}>
-                            <Link to="/add-question">Thêm câu hỏi</Link>
+                        <li
+                            className={`${location.pathname === "admin/add-question" && "active:"}`}
+                        >
+                            <Link className="text-lg" to="/admin/add-question">
+                                Thêm câu hỏi
+                            </Link>
                         </li>
-                        <li className={`${location.pathname === "/create-exam" && "active:"}`}>
-                            <Link to="/create-exam">Tạo đề thi</Link>
+                        <li className={`${location.pathname === "admin/create-exam" && "active:"}`}>
+                            <Link className="text-lg" to="/admin/create-exam">
+                                Tạo đề thi
+                            </Link>
                         </li>
                     </ul>
                 </div>

@@ -31,23 +31,25 @@ function UserDrawer() {
                             </span>
                         </Link>
                     </div>
-                    <ul className="menu menu-compact p-4 w-80 text-base-content sticky">
+                    <ul className="menu menu-compact p-4 w-80 text-base-content sticky font-mono ">
                         {/* <!-- Sidebar content here --> */}
-                        <Link to="/home">
-                            <li className={`${location.pathname === "/" && "active:"}`}>
-                                <a>Trang chủ</a>
-                            </li>
-                        </Link>
-                        <Link to="/list-exam">
-                            <li className={`${location.pathname === "/list-exam" && "active:"}`}>
-                                <a>Danh sách bài kiểm tra</a>
-                            </li>
-                        </Link>
-                        <Link to="/exam-history">
-                            <li className={`${location.pathname === "/list-exam" && "active:"}`}>
-                                <a>Lịch sử làm bài</a>
-                            </li>
-                        </Link>
+                        <li className={`${location.pathname === "/" && "active:"}`}>
+                            <Link className="text-lg" to="/home">
+                                Trang chủ
+                            </Link>
+                        </li>
+                        <li className={`${location.pathname === "/user/list-exam" && "active:"}`}>
+                            <Link className="text-lg" to="/user/list-subjects">
+                                Danh sách các môn học
+                            </Link>
+                        </li>
+                        <li
+                            className={`${location.pathname === "/user/exam-history" && "active:"}`}
+                        >
+                            <Link className="text-lg" to="/user/exam-history">
+                                Lịch sử làm bài
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>

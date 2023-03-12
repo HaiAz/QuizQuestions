@@ -14,6 +14,7 @@ import Error from "../pages/Error/Error";
 import Profile from "../pages/Profile/Profile";
 import AdminPage from "../pages/Admin/AdminPage";
 import AddQuestion from "../pages/AddQuestion/AddQuestion";
+import CreateExam from "../pages/CreateExam/CreateExam";
 import { ProtectedRoute, AdminProtectedRoute } from "./ProtectedRoute";
 
 const AuthLayout = () => {
@@ -65,60 +66,64 @@ export const router = createBrowserRouter([
     {
         element: <AuthLayout />,
         children: [
+            // {
+            //     // path: "/user",
+            //     element: <ProtectedRoute />,
+            //     children: [
             {
                 path: "/user",
-                element: <ProtectedRoute />,
-                children: [
-                    {
-                        path: "/user",
-                        element: <ListExam />,
-                    },
-                    {
-                        path: "/user/profile",
-                        element: <Profile />,
-                    },
-                    {
-                        path: "/user/list-subjects",
-                        element: <ListSubject />,
-                    },
+                element: <ListExam />,
+            },
+            {
+                path: "/user/profile",
+                element: <Profile />,
+            },
+            {
+                path: "/user/list-subjects",
+                element: <ListSubject />,
+            },
 
-                    {
-                        path: "/user/list-exam",
-                        element: <ListExam />,
-                    },
-                    {
-                        path: "/user/exam-history/",
-                        element: <ExamHistory />,
-                    },
-                    {
-                        path: "/user/exam-result/:id",
-                        element: <ExamResult />,
-                    },
-                    {
-                        path: "/user/test",
-                        element: <QuizzBar />,
-                    },
-                ],
+            {
+                path: "/user/list-subjects/exam",
+                element: <ListExam />,
+            },
+            {
+                path: "/user/exam-history/",
+                element: <ExamHistory />,
+            },
+            {
+                path: "/user/exam-result/:id",
+                element: <ExamResult />,
+            },
+            {
+                path: "/user/test",
+                element: <QuizzBar />,
             },
         ],
     },
+    //     ],
+    // },
     {
         element: <AdminLayout />,
         children: [
+            // {
+            //     path: "/admin",
+            //     element: <AdminProtectedRoute />,
+            //     children: [
             {
                 path: "/admin",
-                element: <AdminProtectedRoute />,
-                children: [
-                    {
-                        path: "/admin",
-                        element: <AdminPage />,
-                    },
-                    {
-                        path: "/admin/add-question",
-                        element: <AddQuestion />,
-                    },
-                ],
+                element: <AddQuestion />,
+            },
+            {
+                path: "/admin/add-question",
+                element: <AddQuestion />,
+            },
+            {
+                path: "/admin/create-exam",
+                element: <CreateExam />,
             },
         ],
     },
+    //     ],
+    // },
 ]);

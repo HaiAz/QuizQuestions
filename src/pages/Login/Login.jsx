@@ -15,27 +15,26 @@ function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
-    const formik = useFormik({
-        initialValues: {
-            email: "",
-            password: "",
-        },
-        validationSchema: yup.object({
-            email: yup.string().email("Email is invalid!").required("Email required!"),
-            password: yup.string().min(6).required("Password required!"),
-        }),
-        onSubmit: (values) => {
-            const check = data.some(
-                (e) => e.email === values.email && e.password === values.password
-            );
-            if (check) {
-                navigate("/");
-            } else {
-                alert("Usename or password is incorrect!");
-            }
-        },
-    });
-    console.log(handleLoginWithGoogle, handleLogout, a);
+    // const formik = useFormik({
+    //     initialValues: {
+    //         email: "",
+    //         password: "",
+    //     },
+    //     validationSchema: yup.object({
+    //         email: yup.string().email("Email is invalid!").required("Email required!"),
+    //         password: yup.string().min(6).required("Password required!"),
+    //     }),
+    //     onSubmit: (values) => {
+    //         const check = data.some(
+    //             (e) => e.email === values.email && e.password === values.password
+    //         );
+    //         if (check) {
+    //             navigate("/");
+    //         } else {
+    //             alert("Usename or password is incorrect!");
+    //         }
+    //     },
+    // });
     return (
         <div className="w-full h-screen flex flex-row relative">
             <p className="absolute top-10 right-10">
@@ -78,11 +77,11 @@ function Login() {
                         </button>
                     </div>
 
-                    <div className="flex items-center my-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
+                    {/* <div className="flex items-center my-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                         <p className="text-center font-semibold mx-4 mb-0">Or</p>
-                    </div>
+                    </div> */}
 
-                    <form className="" onSubmit={formik.handleSubmit}>
+                    {/* <form className="" onSubmit={formik.handleSubmit}>
                         <div>
                             <label htmlFor="email" className="text-[16px] font-bold">
                                 Email Address
@@ -129,7 +128,7 @@ function Login() {
                             id="sign-in"
                             name="sign-in"
                         />
-                    </form>
+                    </form> */}
                 </div>
             </div>
         </div>

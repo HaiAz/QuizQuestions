@@ -37,27 +37,28 @@ function AuthProvider({ children }) {
                     role: "USER",
                 });
             }
-            console.log("User created successfully!");
             navigate("/home");
         } catch (err) {
-            console.error("Error creating user:", err);
+            // console.error("Error creating user:", err);
             throw err;
         }
     };
 
     const handleLogout = async (e) => {
         e.preventDefault();
-        alert("Bạn có muốn thoát không?");
+        const confirm = window.confirm("Bạn có muốn thoát không?");
         try {
-            await signOut(auth);
-            navigate("/");
+            if (confirm) {
+                await signOut(auth);
+                navigate("/");
+            }
         } catch (err) {
             throw err;
         }
     };
 
     const getUserInfo = async () => {
-        const userRef = doc(db, "user", auth.currentUser.uid);
+        const userRef = doc(db, "users", auth.currentUser.uid);
         const user = await getDoc(userRef);
         dispatch(setUser({ ...user.data() }));
     };

@@ -8,7 +8,10 @@ const initialState = {
         // firstName: null,
         // lastName: null,
         email: null,
-        avaURL: null,
+        photoURL: null,
+    },
+    description: {
+        des: "Make each day a little better than before",
     },
 };
 
@@ -22,8 +25,11 @@ export const authSlice = createSlice({
         setUser: (state, action) => {
             state.user = action.payload;
         },
+        setDescription: (state, action) => {
+            state.description = action.payload;
+        },
     },
 });
 
-export const { setAuth, setUser } = authSlice.actions;
+export const { setAuth, setUser, setDescription } = authSlice.actions;
 export default authSlice.reducer;

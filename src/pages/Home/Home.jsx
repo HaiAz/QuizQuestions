@@ -5,8 +5,13 @@ import Header from "../../components/Header/Header";
 import SlideShow from "../../components/Slider/SlideShow";
 import SideBar from "../../components/SideBar/SideBar";
 import Footer from "../../components/Footer/Footer";
-
+import { useAppContext } from "../../context/AppProvider";
 export default function Home() {
+    const { setNavTitle } = useAppContext();
+    useEffect(() => {
+        setNavTitle("Trang chủ");
+    }, []);
+
     return (
         <div id="Home" className="w-full min-h-screen relative overflow-hidden">
             <Header />
