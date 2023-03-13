@@ -117,9 +117,9 @@ export default function AddQuestion() {
                         <option value="DEFAULT" disabled selected>
                             Chọn độ khó
                         </option>
-                        <option>Dễ</option>
-                        <option>Trung bình</option>
-                        <option>Khó</option>
+                        <option value={"easy"}>Dễ</option>
+                        <option value={"medium"}>Trung bình</option>
+                        <option value={"hard"}>Khó</option>
                     </select>
                 </div>
 
@@ -132,12 +132,12 @@ export default function AddQuestion() {
                         <option value="DEFAULT" disabled selected>
                             Chọn môn học
                         </option>
-                        <option>Toán</option>
-                        <option>Vật Lý</option>
-                        <option>Hóa Học</option>
-                        <option>Tiếng Anh</option>
-                        <option>Giáo Dục Công Dân</option>
-                        <option>Địa Lý</option>
+                        <option value={"math"}>Toán</option>
+                        <option value={"physic"}>Vật Lý</option>
+                        <option value={"chemistry"}>Hóa Học</option>
+                        <option value={"english"}>Tiếng Anh</option>
+                        <option value={"morality"}>Giáo Dục Công Dân</option>
+                        <option value={"geography"}>Địa Lý</option>
                     </select>
                 </div>
 

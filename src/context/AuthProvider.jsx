@@ -51,6 +51,7 @@ function AuthProvider({ children }) {
             if (confirm) {
                 await signOut(auth);
                 navigate("/");
+                setLoading(true);
             }
         } catch (err) {
             throw err;
@@ -61,6 +62,7 @@ function AuthProvider({ children }) {
         const userRef = doc(db, "users", auth.currentUser.uid);
         const user = await getDoc(userRef);
         dispatch(setUser({ ...user.data() }));
+        setLoading(false);
     };
 
     useEffect(() => {
