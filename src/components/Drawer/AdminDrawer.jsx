@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -57,4 +57,4 @@ function AdminDrawer() {
     );
 }
 
-export default AdminDrawer;
+export default memo(AdminDrawer);

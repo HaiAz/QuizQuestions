@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { BsFacebook, BsTwitter, BsInstagram, BsYoutube, BsTelegram } from "react-icons/bs";
 import { Link } from "react-router-dom";
-export default function Footer() {
+function Footer() {
     return (
         <div className="mt-12">
             <div className="flex flex-col items-center justify-center italic text-sky-500 text-[14px]">
@@ -42,3 +42,5 @@ export default function Footer() {
         </div>
     );
 }
+
+export default memo(Footer);

@@ -3,8 +3,8 @@ import AuthProvider from "../context/AuthProvider";
 import App from "../App";
 import UserDrawer from "../components/Drawer/UserDrawer";
 import AdminDrawer from "../components/Drawer/AdminDrawer";
-import ListExam from "../components/ListExam/ListExam";
-import ListSubject from "../components/ListSubject/ListSubject";
+import ListExam from "../pages/ListExam/ListExam";
+import ListSubject from "../pages/ListSubject/ListSubject";
 import ExamHistory from "../components/ExamHistory/ExamHistory";
 import QuizzBar from "../components/QuizzBar/QuizzBar";
 import ExamResult from "../pages/ExamResult/ExamResult";
@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
                     },
 
                     {
-                        path: "/user/list-subjects/exam",
+                        path: "/user/exam/:id",
                         element: <ListExam />,
                     },
                     {

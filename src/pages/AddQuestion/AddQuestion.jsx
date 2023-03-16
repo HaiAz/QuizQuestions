@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAppContext } from "../../context/AppProvider";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "../../firebase/config";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 export default function AddQuestion() {
     const [question, setQuestion] = useState("");
@@ -11,9 +12,10 @@ export default function AddQuestion() {
     const [answer4, setAnswer4] = useState("");
     const [correctAnswer, setCorrectAnswer] = useState("");
     const [difficult, setDifficult] = useState(null);
-    const [subject, setSubject] = useState(null);
+    const [subject, setSubject] = useState();
     const [className, setClassName] = useState("");
-
+    const [suggest, setSuggest] = useState("");
+    const handleResize = useWindowSize();
     const addQuestion = async () => {
         try {
             const questionRef = collection(db, `questions/${subject}/questions`);
@@ -24,6 +26,7 @@ export default function AddQuestion() {
                 difficult,
                 subject,
                 className,
+                suggest,
             });
             setQuestion("");
             setAnswer1("");
@@ -32,6 +35,7 @@ export default function AddQuestion() {
             setAnswer4("");
             setCorrectAnswer("");
             setClassName("");
+            setSuggest("");
             alert("Thêm thành công!");
         } catch (err) {
             throw err;
@@ -43,7 +47,7 @@ export default function AddQuestion() {
         setNavTitle("Thêm câu hỏi");
     }, []);
     return (
-        <div className="flex items-center">
+        <div className={`${handleResize.width > 1024 ? `flex justify-evenly items-center` : ``}`}>
             <div className="mx-4 my-4 w-[400px]">
                 <div className="form-control mx-4 my-4">
                     <label htmlFor="" className="p-2 font-bold">
@@ -106,8 +110,20 @@ export default function AddQuestion() {
                         className="input input-bordered w-full max-w-xs input-info"
                     />
                 </div>
+                <div className="form-control w-full max-w-xs mx-4 my-4">
+                    <label className="label">
+                        <span className="label-text font-bold">Gợi ý</span>
+                    </label>
+                    <input
+                        value={suggest}
+                        onChange={(e) => setSuggest(e.target.value)}
+                        type="text"
+                        placeholder="Gợi ý"
+                        className="input input-bordered w-full max-w-xs input-accent"
+                    />
+                </div>
             </div>
-            <div className="ml-20 px-4 w-1/2">
+            <div className="mx-4">
                 <div className="mx-2 my-2 px-2 py-2 w-full">
                     <select
                         defaultValue={"DEFAULT"}

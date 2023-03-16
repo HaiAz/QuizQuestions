@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppProvider";
-export default function ListSubject() {
+function ListSubject() {
     const listSubject = [
         {
             id: "math",
@@ -52,7 +52,7 @@ export default function ListSubject() {
                             <div className="card-body items-center text-center">
                                 <h2 className="card-title">{item.name}</h2>
                                 <div className="card-actions">
-                                    <Link to="" className="btn btn-primary">
+                                    <Link to={`/user/exam/${item.id}`} className="btn btn-primary">
                                         Challenge me!
                                     </Link>
                                 </div>
@@ -64,3 +64,5 @@ export default function ListSubject() {
         </div>
     );
 }
+
+export default ListSubject;

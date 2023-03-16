@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { memo } from "react";
 import { BsWater } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector, useDispatch } from "react-redux";
 function Header() {
-    // const { showMenu, setShowMenu } = useAppContext();
-    // const toggleShowMenu = () => {
-    //     setShowMenu(!showMenu);
-    // };
-    const [checkLogin, setCheckLogin] = useState(false);
-    const { handleLoginWithGoogle, handleLogout } = useAuthContext();
+    const { handleLogout } = useAuthContext();
     const { navTitle, setNavTitle, navbarTitle } = useAppContext();
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.authSlice.auth);
     const userInfo = useSelector((state) => state.authSlice.user);
+    const location = useLocation();
+
     return (
         <div className="h-16 flex justify-between items-center bg-slate-300 z-50">
             <div className="flex-1">
                 <label
                     htmlFor="my-drawer-2"
-                    className="lg:hidden p-4 btn btn-ghost text-secondary-content drawer-button"
+                    className={`${
+                        location.pathname === "/home" ||
+                        location.pathname === "/" ||
+                        location.pathname === "/Home"
+                            ? "hidden"
+                            : "lg:hidden p-4 btn btn-ghost text-secondary-content drawer-button"
+                    }`}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -70,4 +73,4 @@ function Header() {
     );
 }
 
-export default React.memo(Header);
+export default memo(Header);
