@@ -15,6 +15,7 @@ import Profile from "../pages/Profile/Profile";
 import AdminPage from "../pages/Admin/AdminPage";
 import AddQuestion from "../pages/AddQuestion/AddQuestion";
 import CreateExam from "../pages/CreateExam/CreateExam";
+import Quizz from "../pages/Quizz/Quizz";
 import { ProtectedRoute, AdminProtectedRoute } from "./ProtectedRoute";
 
 const AuthLayout = () => {
@@ -96,8 +97,8 @@ export const router = createBrowserRouter([
                         element: <ExamResult />,
                     },
                     {
-                        path: "/user/test",
-                        element: <QuizzBar />,
+                        path: "/user/test/:id",
+                        element: <Quizz />,
                     },
                 ],
             },

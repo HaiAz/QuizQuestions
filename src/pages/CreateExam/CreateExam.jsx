@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { auth, db } from "../../firebase/config";
 import { query, where, getDocs, addDoc, collection } from "firebase/firestore";
 import { getDatabase, ref, child, get } from "firebase/database";
 import { useAppContext } from "../../context/AppProvider";
-export default function CreateExam() {
+function CreateExam() {
     const [examName, setExamName] = useState("");
     const [time, setTime] = useState("");
     const [numberQuestion, setNumberQuestion] = useState("");
@@ -38,6 +38,8 @@ export default function CreateExam() {
             throw err;
         }
     };
+
+    onCreateExam();
 
     const { setNavTitle } = useAppContext();
     useEffect(() => {
@@ -133,3 +135,5 @@ export default function CreateExam() {
         </div>
     );
 }
+
+export default memo(CreateExam);
