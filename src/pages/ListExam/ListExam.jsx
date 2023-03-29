@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth, db } from "../../firebase/config";
-import { getDocs, addDoc, collection, where, doc, onSnapshot } from "firebase/firestore";
+import { getDocs, addDoc, collection, where } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 function ListExam() {
@@ -39,6 +39,21 @@ function ListExam() {
             });
             const selectedItem = arr.find((item) => item.id === examID);
             console.log("Mảng được chọn: ", selectedItem);
+            console.log(typeof selectedItem);
+            const { question, ...examTest } = selectedItem;
+            console.log(examTest);
+            // const newItem = selectedItem.map(
+            //     ({ className, examName, id, question, subject, time }) => ({
+            //         className,
+            //         examName,
+            //         id,
+            //         question,
+            //         subject,
+            //         time,
+            //     })
+            // );
+
+            // console.log("Mảng mới: ", newItem);
         } catch (err) {
             alert(err);
         }
