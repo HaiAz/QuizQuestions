@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth, db } from "../../firebase/config";
-import { getDocs, addDoc, collection, where } from "firebase/firestore";
+import { getDocs, doc, collection, where, setDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 function ListExam() {
@@ -12,8 +12,8 @@ function ListExam() {
 
     const examRef = collection(db, `exams/${id}/exams`);
     useEffect(() => {
+        //Lấy danh sách bài kiểm tra
         const getExam = async () => {
-            // const questionID = [];
             try {
                 const arr = [];
                 const q = await getDocs(examRef);
@@ -30,7 +30,7 @@ function ListExam() {
         getExam();
     }, []);
 
-    const createHistory = async (examID) => {
+    const startExam = async (examID) => {
         try {
             const arr = [];
             const getExam = await getDocs(examRef, where("id", "==", examID));
@@ -38,22 +38,13 @@ function ListExam() {
                 arr.push({ ...doc.data(), id: doc.id });
             });
             const selectedItem = arr.find((item) => item.id === examID);
-            console.log("Mảng được chọn: ", selectedItem);
-            console.log(typeof selectedItem);
-            const { question, ...examTest } = selectedItem;
-            console.log(examTest);
-            // const newItem = selectedItem.map(
-            //     ({ className, examName, id, question, subject, time }) => ({
-            //         className,
-            //         examName,
-            //         id,
-            //         question,
-            //         subject,
-            //         time,
-            //     })
-            // );
 
-            // console.log("Mảng mới: ", newItem);
+            console.log("Mảng được chọn : ", selectedItem);
+            const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exam/${examID}`);
+            // setHistory(selectedItem);
+            // const { question, ...examTest } = selectedItem;
+            // console.log(examTest);
+            // console.log("history: " + history);
         } catch (err) {
             alert(err);
         }
@@ -65,10 +56,10 @@ function ListExam() {
                 <div> ...loading</div>
             ) : (
                 <div className="flex flex-wrap justify-around">
-                    {listExam?.map((e, i) => {
+                    {listExam?.map((item) => {
                         return (
                             <div
-                                key={e.id}
+                                key={item.id}
                                 className="max-w-[450px] card card-side bg-slate-200 shadow-xl mx-2 my-2 px-10"
                             >
                                 <figure className="w-40">
@@ -78,20 +69,20 @@ function ListExam() {
                                     />
                                 </figure>
                                 <div className="card-body px-2">
-                                    <h2 className="card-title font-bold">{e.examName}</h2>
+                                    <h2 className="card-title font-bold">{item.examName}</h2>
                                     <div>
-                                        <p className="my-2">Lớp: {e.className}</p>
-                                        <p className="my-2">Thời gian làm bài: {e.time} phút</p>
+                                        <p className="my-2">Lớp: {item.className}</p>
+                                        <p className="my-2">Thời gian làm bài: {item.time} phút</p>
                                         <p className="my-2">
-                                            Số lượng câu hỏi: {e.numberQuestion} câu
+                                            Số lượng câu hỏi: {item.numberQuestion} câu
                                         </p>
                                         <p className="my-2">Coin: 20$</p>
                                     </div>
                                     <div
                                         className="card-actions justify-center mt-4"
-                                        onClick={() => createHistory(e.id)}
+                                        onClick={() => startExam(item.id)}
                                     >
-                                        <Link to={`/user/test/${e.id}`}>
+                                        <Link to={`/user/test/${item.id}`}>
                                             <button className="btn btn-primary">Bắt đầu làm</button>
                                         </Link>
                                     </div>
