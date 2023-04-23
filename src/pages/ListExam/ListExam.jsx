@@ -3,6 +3,7 @@ import { auth, db } from "../../firebase/config";
 import { getDocs, doc, collection, where, setDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 function ListExam() {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
@@ -10,9 +11,9 @@ function ListExam() {
     // const [examID, setExamID] = useState();
     const [history, setHistory] = useState();
 
-    const examRef = collection(db, `exams/${id}/exams`);
     useEffect(() => {
         //Lấy danh sách bài kiểm tra
+        const examRef = collection(db, `exams/${id}/exams`);
         const getExam = async () => {
             try {
                 const arr = [];
@@ -33,14 +34,28 @@ function ListExam() {
     const startExam = async (examID) => {
         try {
             const arr = [];
-            const getExam = await getDocs(examRef, where("id", "==", examID));
+            const examRef = doc(db, `exams/${id}/${examID}`);
+            const getExam = await getDocs(examRef);
             getExam.forEach((doc) => {
-                arr.push({ ...doc.data(), id: doc.id });
+                arr.push({
+                    ...doc.data(),
+                    className: doc.data().name,
+                    examName: doc.data().examName,
+                    numberQuestion: doc.data().question.length,
+                    subject: doc.data().subject,
+                    time: doc.data().time,
+                    question: doc.data()?.map((q, i) => ({
+                        ...q,
+                        index: i + 1,
+                    })),
+                    
+                });
             });
-            const selectedItem = arr.find((item) => item.id === examID);
 
-            console.log("Mảng được chọn : ", selectedItem);
             const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exam/${examID}`);
+            await setDoc(historyRef, {
+                ...arr,
+            });
             // setHistory(selectedItem);
             // const { question, ...examTest } = selectedItem;
             // console.log(examTest);
