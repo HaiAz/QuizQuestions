@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth, db } from "../../firebase/config";
-import { getDocs, doc, collection, where, setDoc } from "firebase/firestore";
+import { getDocs, doc, collection, where, setDoc, getDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,28 +34,36 @@ function ListExam() {
     const startExam = async (examID) => {
         try {
             const arr = [];
-            const examRef = doc(db, `exams/${id}/${examID}`);
-            const getExam = await getDocs(examRef);
-            getExam.forEach((doc) => {
-                arr.push({
-                    ...doc.data(),
-                    className: doc.data().name,
-                    examName: doc.data().examName,
-                    numberQuestion: doc.data().question.length,
-                    subject: doc.data().subject,
-                    time: doc.data().time,
-                    question: doc.data()?.map((q, i) => ({
-                        ...q,
-                        index: i + 1,
-                    })),
-                    
-                });
-            });
+            const examRef = doc(db, "exams", `${id}/exams/${examID}`);
+            const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${examID}`);
+            const getExam = await getDoc(examRef);
+            // getExam.forEach((doc) => {
+            //     arr.push({
+            //         ...doc.data(),
+            //         className: doc.data().name,
+            //         examName: doc.data().examName,
+            //         numberQuestion: doc.data().question.length,
+            //         subject: doc.data().subject,
+            //         time: doc.data().time,
+            //         question: doc.data()?.map((q, i) => ({
+            //             ...q,
+            //             index: i + 1,
+            //         })),
+            //     });
+            // });
 
-            const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exam/${examID}`);
-            await setDoc(historyRef, {
-                ...arr,
-            });
+            console.log(getExam.data());
+            console.log(123456);
+
+            const isTakingTest = {
+                status: true,
+                examName: getExam.data().name,
+            };
+
+            // const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exam/${examID}`);
+            // await setDoc(historyRef, {
+            //     ...arr,
+            // });
             // setHistory(selectedItem);
             // const { question, ...examTest } = selectedItem;
             // console.log(examTest);

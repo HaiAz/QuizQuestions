@@ -4,14 +4,18 @@ import { query, where, getDocs, addDoc, collection } from "firebase/firestore";
 import { getDatabase, ref, child, get } from "firebase/database";
 import { useAppContext } from "../../context/AppProvider";
 function CreateExam() {
-    const [examName, setExamName] = useState("");
-    const [time, setTime] = useState("");
-    const [numberQuestion, setNumberQuestion] = useState("");
-    const [subject, setSubject] = useState();
-    const [className, setclassName] = useState("");
+    const [examName, setExamName] = useState(null);
+    const [time, setTime] = useState(null);
+    const [numberQuestion, setNumberQuestion] = useState(null);
+    const [subject, setSubject] = useState(null);
+    const [className, setclassName] = useState(null);
+
+    const { setNavTitle } = useAppContext();
+    useEffect(() => {
+        setNavTitle("Tạo đề thi");
+    }, []);
 
     const examRef = collection(db, "exams", `${subject}/exams`);
-
     const onCreateExam = async () => {
         try {
             const exam = [];
@@ -32,19 +36,13 @@ function CreateExam() {
                 subject,
                 className,
                 question: [...exam].sort(() => -0.5 + Math.random()).slice(0, numberQuestion),
+            }).then(() => {
+                alert("Them thanh cong");
             });
-            alert("Them thanh cong");
         } catch (err) {
             throw err;
         }
     };
-
-    onCreateExam();
-
-    const { setNavTitle } = useAppContext();
-    useEffect(() => {
-        setNavTitle("Tạo đề thi");
-    }, []);
 
     return (
         <div className=" container overflow-hidden">
@@ -136,4 +134,4 @@ function CreateExam() {
     );
 }
 
-export default memo(CreateExam);
+export default CreateExam;
