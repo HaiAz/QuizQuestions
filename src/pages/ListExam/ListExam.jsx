@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { auth, db } from "../../firebase/config";
-import { getDocs, doc, collection, where, setDoc, getDoc } from "firebase/firestore";
+import { getDocs, doc, collection, where, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/authSlice";
+import { authSlice } from "./../../redux/authSlice";
 function ListExam() {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [listExam, setListExam] = useState();
     // const [examID, setExamID] = useState();
     const [history, setHistory] = useState();
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.authSlice.user);
 
     useEffect(() => {
         //Lấy danh sách bài kiểm tra
@@ -27,49 +31,43 @@ function ListExam() {
                 throw err;
             }
         };
-
         getExam();
     }, []);
 
     const startExam = async (examID) => {
         try {
-            const arr = [];
+            const userRef = doc(db, "users", auth.currentUser.uid);
             const examRef = doc(db, "exams", `${id}/exams/${examID}`);
             const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${examID}`);
-            const getExam = await getDoc(examRef);
-            // getExam.forEach((doc) => {
-            //     arr.push({
-            //         ...doc.data(),
-            //         className: doc.data().name,
-            //         examName: doc.data().examName,
-            //         numberQuestion: doc.data().question.length,
-            //         subject: doc.data().subject,
-            //         time: doc.data().time,
-            //         question: doc.data()?.map((q, i) => ({
-            //             ...q,
-            //             index: i + 1,
-            //         })),
-            //     });
-            // });
+            const exam = await getDoc(examRef);
 
-            console.log(getExam.data());
-            console.log(123456);
+            //tạo lịch sử làm bài
+            await setDoc(historyRef, {
+                ...exam.data(),
+                className: exam.data().className,
+                examName: exam.data().examName,
+                numberQuestion: exam.data().question.length,
+                subject: exam.data().subject,
+                time: exam.data().time,
+                question: exam.data().question.map((q, i) => ({
+                    ...q,
+                    index: i + 1,
+                })),
+            });
 
+            //trạng thái của user lúc làm bài
             const isTakingTest = {
                 status: true,
-                examName: getExam.data().name,
+                examName: exam.data().examName,
+                time: exam.data().time,
+                examID,
             };
 
-            // const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exam/${examID}`);
-            // await setDoc(historyRef, {
-            //     ...arr,
-            // });
-            // setHistory(selectedItem);
-            // const { question, ...examTest } = selectedItem;
-            // console.log(examTest);
-            // console.log("history: " + history);
+            //update trạng thái user
+            await updateDoc(userRef, { isTakingTest });
+            dispatch(setUser({ ...user, isTakingTest }));
         } catch (err) {
-            alert(err);
+            console.log(err);
         }
     };
 
@@ -78,7 +76,7 @@ function ListExam() {
             {loading ? (
                 <div> ...loading</div>
             ) : (
-                <div className="flex flex-wrap justify-around">
+                <div className="flex flex-wrap justify-around mt-10">
                     {listExam?.map((item) => {
                         return (
                             <div

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//giá trị khởi tạo
 const initialState = {
     auth: { isLogin: false },
     user: {
@@ -15,6 +16,7 @@ const initialState = {
     },
 };
 
+//tạo authSlice
 export const authSlice = createSlice({
     name: "auth",
     initialState,

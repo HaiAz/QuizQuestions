@@ -6,38 +6,63 @@ function Footer() {
         <div className="mt-12">
             <div className="flex flex-col items-center justify-center italic text-sky-500 text-[14px]">
                 <Link>Contact</Link>
-                <a href="#" className="mb-2">
+                <Link to="#" className="mb-2">
                     Testimonials
-                </a>
-                <a href="#" className="mb-2">
+                </Link>
+                <Link to="#" className="mb-2">
                     Terms & Conditions
-                </a>
-                <a href="#" className="mb-2">
+                </Link>
+                <Link to="#" className="mb-2">
                     Privacy Policy
-                </a>
-                <a href="#" className="mb-2">
+                </Link>
+                <Link to="#" className="mb-2">
                     For Teams
-                </a>
-                <a href="#" className="mb-2">
+                </Link>
+                <Link to="#" className="mb-2">
                     Join Us!
-                </a>
+                </Link>
             </div>
             <div className="flex justify-center">
-                <a href="" className="px-4 py-4 mx-2 my-2 text-2xl">
+                <Link
+                    to="https://www.facebook.com/aBci.iXyZ/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 mx-2 my-2 text-2xl"
+                >
                     <BsFacebook />
-                </a>
-                <a href="" className="px-4 py-4 mx-2 my-2 text-2xl">
+                </Link>
+                <Link
+                    to="https://twitter.com/NMIXX_official"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 mx-2 my-2 text-2xl"
+                >
                     <BsTwitter />
-                </a>
-                <a href="" className="px-4 py-4 mx-2 my-2 text-2xl">
+                </Link>
+                <Link
+                    to="https://www.instagram.com/sooyaaa__/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 mx-2 my-2 text-2xl"
+                >
                     <BsInstagram />
-                </a>
-                <a href="" className="px-4 py-4 mx-2 my-2 text-2xl">
+                </Link>
+                <Link
+                    to="https://www.youtube.com/@haileuc7728"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 mx-2 my-2 text-2xl"
+                >
                     <BsYoutube />
-                </a>
-                <a href="" className="px-4 py-4 mx-2 my-2 text-2xl">
+                </Link>
+                <Link
+                    to="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-4 mx-2 my-2 text-2xl"
+                >
                     <BsTelegram />
-                </a>
+                </Link>
             </div>
         </div>
     );

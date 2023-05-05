@@ -43,11 +43,8 @@ function Header() {
                     {navbarTitle}
                 </div>
             </div>
-            {/* <div className="h-4 mr-5"> */}
-            {/* <BsWater className="text-2xl" onClick={toggleShowMenu} /> */}
 
             <div className="dropdown dropdown-end mr-4">
-                {/* {if(auth.)} */}
                 <label tabIndex={0} className="btn m-1">
                     <BsWater />
                 </label>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+//Lấy chiều rộng, chiều cao hiện tại của màn hình
 export const useWindowSize = () => {
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,

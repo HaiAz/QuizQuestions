@@ -20,6 +20,7 @@ function AuthProvider({ children }) {
     const user = useSelector((state) => state.authSlice.user);
     const [loading, setLoading] = useState(true);
 
+    //đăng nhập bằng google
     const handleLoginWithGoogle = async () => {
         const googleProvider = new GoogleAuthProvider();
         try {
@@ -39,11 +40,11 @@ function AuthProvider({ children }) {
             }
             navigate("/home");
         } catch (err) {
-            // console.error("Error creating user:", err);
             throw err;
         }
     };
 
+    //đăng xuất
     const handleLogout = async (e) => {
         e.preventDefault();
         const confirm = window.confirm("Bạn có muốn thoát không?");
@@ -58,6 +59,7 @@ function AuthProvider({ children }) {
         }
     };
 
+    //lấy thông tin người dùng
     const getUserInfo = async () => {
         const userRef = doc(db, "users", auth.currentUser.uid);
         const user = await getDoc(userRef);
@@ -65,6 +67,7 @@ function AuthProvider({ children }) {
         setLoading(false);
     };
 
+    //lấy thông tin user và set trạng thái
     useEffect(() => {
         const unsubcribe = onAuthStateChanged(auth, (isUser) => {
             if (isUser) {
