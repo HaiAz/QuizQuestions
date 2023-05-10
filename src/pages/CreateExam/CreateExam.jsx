@@ -8,7 +8,7 @@ function CreateExam() {
     const [time, setTime] = useState(null);
     const [numberQuestion, setNumberQuestion] = useState(null);
     const [subject, setSubject] = useState(null);
-    const [className, setclassName] = useState(null);
+    const [className, setClassName] = useState(null);
 
     const { setNavTitle } = useAppContext();
     useEffect(() => {
@@ -26,7 +26,7 @@ function CreateExam() {
             );
 
             querySnapshot.forEach((doc) => {
-                exam.push({ ...doc.data, id: doc.id });
+                exam.push({ ...doc.data(), id: doc.id });
             });
 
             await addDoc(examRef, {
@@ -100,7 +100,7 @@ function CreateExam() {
                 <select
                     defaultValue={"DEFAULT"}
                     className="select select-accent w-full max-w-xs"
-                    onChange={(e) => setclassName(e.target.value)}
+                    onChange={(e) => setClassName(e.target.value)}
                 >
                     <option value="DEFAULT" disabled selected>
                         Chọn lớp

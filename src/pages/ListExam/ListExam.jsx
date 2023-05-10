@@ -6,12 +6,15 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 import { authSlice } from "./../../redux/authSlice";
+import { useAppContext } from "../../context/AppProvider";
 function ListExam() {
     const { id } = useParams();
+    const { setNavTitle } = useAppContext();
     const [loading, setLoading] = useState(true);
     const [listExam, setListExam] = useState();
     // const [examID, setExamID] = useState();
     const [history, setHistory] = useState();
+    const [listQuestion, setListQuestion] = useState([]);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authSlice.user);
 
@@ -31,11 +34,13 @@ function ListExam() {
                 throw err;
             }
         };
+        setNavTitle(`Danh sách bài kiểm tra`);
         getExam();
     }, []);
 
     const startExam = async (examID) => {
         try {
+            const q = [];
             const userRef = doc(db, "users", auth.currentUser.uid);
             const examRef = doc(db, "exams", `${id}/exams/${examID}`);
             const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${examID}`);
@@ -66,6 +71,7 @@ function ListExam() {
             //update trạng thái user
             await updateDoc(userRef, { isTakingTest });
             dispatch(setUser({ ...user, isTakingTest }));
+            setNavTitle(user?.isTakingTest.examName);
         } catch (err) {
             console.log(err);
         }
