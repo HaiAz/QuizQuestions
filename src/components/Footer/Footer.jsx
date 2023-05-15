@@ -3,7 +3,7 @@ import { BsFacebook, BsTwitter, BsInstagram, BsYoutube, BsTelegram } from "react
 import { Link } from "react-router-dom";
 function Footer() {
     return (
-        <div className="mt-12">
+        <div className="pt-12 w-full bg-amber-100">
             <div className="flex flex-col items-center justify-center italic text-sky-500 text-[14px]">
                 <Link>Contact</Link>
                 <Link to="#" className="mb-2">
