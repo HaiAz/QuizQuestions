@@ -71,7 +71,7 @@ function ListExam() {
             //update trạng thái user
             await updateDoc(userRef, { isTakingTest });
             dispatch(setUser({ ...user, isTakingTest }));
-            setNavTitle(user?.isTakingTest.examName);
+            // setNavTitle(user?.isTakingTest.examName);
         } catch (err) {
             console.log(err);
         }
