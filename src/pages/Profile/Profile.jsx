@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { auth, db } from "../../firebase/config";
-import { useAuthContext } from "../../context/AuthProvider";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector, useDispatch } from "react-redux";
-import { authSlice } from "./../../redux/authSlice";
-import { setDescription } from "./../../redux/authSlice";
 
 function Profile() {
-    const [inputValue, setInputValue] = useState("");
-    const dispatch = useDispatch();
     const userInfo = useSelector((state) => state.authSlice.user);
     const { setNavTitle } = useAppContext();
 
