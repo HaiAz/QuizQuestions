@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AiOutlineFlag } from "react-icons/ai";
+import { AiOutlineFlag, AiFillFlag } from "react-icons/ai";
 import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import { useParams, useNavigate } from "react-router-dom";
 import { db, auth } from "../../firebase/config";
@@ -156,7 +156,7 @@ export default function Quizz() {
         navigate("/user/list-subjects");
     };
     return (
-        <div className="w-full h-full overflow-hidden flex">
+        <div className="w-full h-full overflow-hidden flex justify-end">
             {/* Nếu có thì mới render */}
             {!!filterQuestion?.question?.length && (
                 <div className="flex-1 ">
@@ -194,7 +194,6 @@ export default function Quizz() {
                     </div>
 
                     {/* Flag */}
-
                     <div className="flex ml-12 mt-12 text-xl">
                         <span className="mr-8">Phân vân</span>
                         <AiOutlineFlag
@@ -266,11 +265,11 @@ export default function Quizz() {
                         <div className="mx-2" key={i}>
                             <button
                                 className={`btn btn-outline mx-2 my-2 px-2 py-2 w-16 
-                            ${q.yourChoice ? "btn-primary" : ""}
+                            ${q.yourChoice ? "btn-primary" : ""} 
                             `}
                                 onClick={() => setCurrentQuestion(q.index)}
                             >
-                                Câu {q.index}
+                                Câu {q.index} {q.flag && <AiFillFlag className="text-red-600" />}
                             </button>
                         </div>
                     ))}

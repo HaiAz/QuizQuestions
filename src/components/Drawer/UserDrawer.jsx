@@ -33,19 +33,17 @@ function UserDrawer() {
                     </div>
                     <ul className="menu menu-compact p-4 w-80 text-base-content sticky font-mono ">
                         {/* <!-- Sidebar content here --> */}
-                        <li className={`${location.pathname === "/" && "active:"}`}>
+                        <li className={`${location.pathname === "/" && "active"}`}>
                             <Link className="text-lg" to="/home">
                                 Trang chủ
                             </Link>
                         </li>
-                        <li className={`${location.pathname === "/user/list-exam" && "active:"}`}>
+                        <li className={`${location.pathname === "/user/list-exam" && "active"}`}>
                             <Link className="text-lg" to="/user/list-subjects">
                                 Danh sách các môn học
                             </Link>
                         </li>
-                        <li
-                            className={`${location.pathname === "/user/exam-history" && "active:"}`}
-                        >
+                        <li className={`${location.pathname === "/user/exam-history" && "active"}`}>
                             <Link className="text-lg" to="/user/exam-history">
                                 Lịch sử làm bài
                             </Link>

@@ -47,7 +47,7 @@ function Header() {
                 <label tabIndex={0} className="m-1">
                     <img
                         src={userInfo.photoURL}
-                        className="w-12 rounded-full shadow-3xl hover:w-14 hover:cursor-pointer"
+                        className="w-12 rounded-full shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent"
                         alt="avatar"
                     />
                 </label>
