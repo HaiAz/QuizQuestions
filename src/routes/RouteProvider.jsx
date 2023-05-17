@@ -5,17 +5,16 @@ import UserDrawer from "../components/Drawer/UserDrawer";
 import AdminDrawer from "../components/Drawer/AdminDrawer";
 import ListExam from "../pages/ListExam/ListExam";
 import ListSubject from "../pages/ListSubject/ListSubject";
-import ExamHistory from "../components/ExamHistory/ExamHistory";
-import QuizzBar from "../components/QuizzBar/QuizzBar";
-import ExamResult from "../pages/ExamResult/ExamResult";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Error from "../pages/Error/Error";
 import Profile from "../pages/Profile/Profile";
-import AdminPage from "../pages/Admin/AdminPage";
 import AddQuestion from "../pages/AddQuestion/AddQuestion";
 import CreateExam from "../pages/CreateExam/CreateExam";
 import Quizz from "../pages/Quizz/Quizz";
+import ExamHistory from "../pages/History/ExamHistory";
+import ExamResult from "../pages/History/ExamResult";
+
 import { ProtectedRoute, AdminProtectedRoute } from "./ProtectedRoute";
 
 const AuthLayout = () => {
@@ -93,7 +92,7 @@ export const router = createBrowserRouter([
                         element: <ExamHistory />,
                     },
                     {
-                        path: "/user/exam-result/:id",
+                        path: "/user/exam-history/:id",
                         element: <ExamResult />,
                     },
                     {

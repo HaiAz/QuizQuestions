@@ -11,8 +11,6 @@ function AppProvider({ children }) {
         <appContext.Provider
             value={{
                 navbarTitle,
-                showMenu,
-                setShowMenu,
                 getNavTitle,
                 setNavTitle,
             }}
@@ -22,10 +20,8 @@ function AppProvider({ children }) {
     );
 }
 export const useAppContext = () => {
-    const { showMenu, setShowMenu, getNavTitle, setNavTitle, navbarTitle } = useContext(appContext);
+    const { getNavTitle, setNavTitle, navbarTitle } = useContext(appContext);
     return {
-        showMenu,
-        setShowMenu,
         getNavTitle,
         setNavTitle,
         navbarTitle,
