@@ -1,7 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
-import { auth, db } from "../../firebase/config";
-import { query, where, getDocs, addDoc, collection } from "firebase/firestore";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { db } from "../../firebase/config";
+import { where, getDocs, addDoc, collection } from "firebase/firestore";
 import { useAppContext } from "../../context/AppProvider";
 function CreateExam() {
     const [examName, setExamName] = useState(null);

@@ -42,10 +42,13 @@ function ListSubject() {
     }, []);
     return (
         <div className="flex justify-center items-center flex-col container">
-            <div className="container flex flex-row flex-wrap gap-8 justify-center item md:justify-around p-8">
+            <div className="container flex flex-row flex-wrap gap-8 justify-center item md:justify-center p-8">
                 {listSubject.map((item) => {
                     return (
-                        <div key={item.id} className="card w-72 bg-base-100 shadow-xl">
+                        <div
+                            key={item.id}
+                            className="card w-72 bg-base-100 shadow-lg shadow-red-300"
+                        >
                             <figure className="px-10 pt-10">
                                 <img src={item.img} alt={item.name} className="rounded-xl" />
                             </figure>

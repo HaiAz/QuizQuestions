@@ -19,7 +19,7 @@ function UserDrawer() {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <div className="bg-base-300 w-80 overflow-hidden">
+                <div className="bg-[#efeae6] w-80 overflow-hidden">
                     <div className="hidden lg:flex h-20 p-4 items-center">
                         <Link to="/" className="btn btn-ghost">
                             <span className="text-2xl font-mono uppercase font-bold text-sky-400">

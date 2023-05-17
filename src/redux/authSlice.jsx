@@ -6,8 +6,6 @@ const initialState = {
     user: {
         uid: null,
         displayName: null,
-        // firstName: null,
-        // lastName: null,
         email: null,
         photoURL: null,
     },

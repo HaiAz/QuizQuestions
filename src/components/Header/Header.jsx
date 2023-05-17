@@ -1,19 +1,18 @@
 import React, { memo } from "react";
-import { BsWater } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector, useDispatch } from "react-redux";
+import { auth } from "../../firebase/config";
 function Header() {
     const { handleLogout } = useAuthContext();
     const { navTitle, setNavTitle, navbarTitle } = useAppContext();
     const dispatch = useDispatch();
-    const auth = useSelector((state) => state.authSlice.auth);
+    const checkAuth = useSelector((state) => state.authSlice.auth);
     const userInfo = useSelector((state) => state.authSlice.user);
     const location = useLocation();
-
     return (
-        <div className="h-16 flex justify-between items-center bg-slate-300 z-50">
+        <div className="h-16 flex justify-between items-center bg-[#eeb9cb] z-50">
             <div className="flex-1">
                 <label
                     htmlFor="my-drawer-2"
@@ -45,23 +44,27 @@ function Header() {
             </div>
 
             <div className="dropdown dropdown-end mr-4">
-                <label tabIndex={0} className="btn m-1">
-                    <BsWater />
+                <label tabIndex={0} className="m-1">
+                    <img
+                        src={userInfo.photoURL}
+                        className="w-12 rounded-full shadow-3xl hover:w-14 hover:cursor-pointer"
+                        alt="avatar"
+                    />
                 </label>
                 <ul
                     tabIndex={0}
                     className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                    <li className={auth.isLogin ? `` : `hidden`}>
+                    <li className={checkAuth.isLogin ? `` : `hidden`}>
                         <Link to="/user/profile">Thông tin cá nhân</Link>
                     </li>
                     <li>
                         <Link to="/user/list-subjects">Take the test</Link>
                     </li>
-                    <li className={auth.isLogin ? `hidden` : ``}>
+                    <li className={checkAuth.isLogin ? `hidden` : ``}>
                         <Link to="/login">Đăng nhập</Link>
                     </li>
-                    <li className={auth.isLogin ? `` : `hidden`} onClick={handleLogout}>
+                    <li className={checkAuth.isLogin ? `` : `hidden`} onClick={handleLogout}>
                         <Link to="/home">Đăng xuất</Link>
                     </li>
                 </ul>

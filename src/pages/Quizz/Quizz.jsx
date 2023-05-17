@@ -5,21 +5,21 @@ import { useParams, useNavigate } from "react-router-dom";
 import { db, auth } from "../../firebase/config";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppContext } from "../../context/AppProvider";
-import { getDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { getDoc, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 export default function Quizz() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((state) => state.authSlice.user);
 
-    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [currentQuestion, setCurrentQuestion] = useState(1);
     const [listQuestion, setListQuestion] = useState();
     const [filterQuestion, setFilterQuestion] = useState(listQuestion);
     const [yourSelected, setYourSelected] = useState();
 
     const { setNavTitle } = useAppContext();
 
-    //Đang làm bài này thì không nhảy sang làm bài khác được
+    // Đang làm bài này thì không nhảy sang làm bài khác được
     // useEffect(() => {
     //     if (user?.isTakingTest.examID !== id) {
     //         navigate("/user");
@@ -51,7 +51,17 @@ export default function Quizz() {
     };
 
     //Câu hỏi phân vân
-    const flag = () => {};
+    const toggleFlag = async (questionID) => {
+        const list = {
+            ...listQuestion,
+            question: listQuestion?.question.map((q) =>
+                q.id === questionID ? { ...q, flag: !q.flag ?? true } : q
+            ),
+        };
+        setFilterQuestion(list);
+        const examRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
+        await setDoc(examRef, list);
+    };
 
     //Sắp xếp danh sách câu hỏi
     const handleFilterListQuestion = (e) => {
@@ -73,10 +83,15 @@ export default function Quizz() {
                     question: listQuestion.question.filter((q) => !!q.yourChoice === false),
                 });
                 setCurrentQuestion(
-                    listQuestion.questions.filter((q) => !!q.yourChoice === false)[0]?.index
+                    listQuestion.question.filter((q) => !!q.yourChoice === false)[0]?.index
                 );
                 break;
             case "flag":
+                setFilterQuestion({
+                    ...filterQuestion,
+                    question: listQuestion.question.filter((q) => !!q.flag),
+                });
+                setCurrentQuestion(listQuestion.question.filter((q) => !!q.flag)[0]?.index);
                 break;
             default:
                 break;
@@ -98,7 +113,7 @@ export default function Quizz() {
 
     //Chuyển tiếp câu hỏi
     const handleNextQuestion = (e) => {
-        if (currentQuestion >= listQuestion.numberQuestion - 1) {
+        if (currentQuestion >= listQuestion?.numberQuestion) {
             e.preventDefault();
             return;
         } else {
@@ -108,7 +123,7 @@ export default function Quizz() {
 
     //Quay lại câu hỏi trước đó
     const handlePreQuestion = (e) => {
-        if (currentQuestion > 0) {
+        if (currentQuestion >= 1) {
             setCurrentQuestion(currentQuestion - 1);
         } else {
             e.preventDefault();
@@ -116,6 +131,30 @@ export default function Quizz() {
         }
     };
 
+    // nộp bài
+    const finish = async () => {
+        const userRef = doc(db, "users", `${auth.currentUser.uid}`);
+        const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
+
+        const pointPerQuestion = 10 / listQuestion.numberQuestion;
+        const correctAnswer = listQuestion.question.filter(
+            (q) => q.correctAnswer === q.yourChoice
+        ).length;
+        const calScore = (pointPerQuestion * correctAnswer).toFixed(3);
+
+        console.log("point:" + pointPerQuestion);
+        console.log("correct: " + correctAnswer);
+        console.log(calScore);
+
+        await setDoc(historyRef, {
+            ...listQuestion,
+            calScore,
+            correctAnswer,
+        });
+
+        await updateDoc(userRef, { isTakingTest: {} });
+        navigate("/user/list-subjects");
+    };
     return (
         <div className="w-full h-full overflow-hidden flex">
             {/* Nếu có thì mới render */}
@@ -124,11 +163,11 @@ export default function Quizz() {
                     <div className="flex flex-col justify-center items-start ml-8 mt-4">
                         <div className="text-2xl">
                             {"Câu" +
-                                ` ${currentQuestion + 1}: ` +
-                                listQuestion?.question[currentQuestion]?.question}
+                                ` ${currentQuestion}: ` +
+                                listQuestion?.question[currentQuestion - 1]?.question}
                         </div>
                         <div className="flex flex-col mt-2">
-                            {listQuestion?.question[currentQuestion]?.answer.map((a, index) => (
+                            {listQuestion?.question[currentQuestion - 1]?.answer.map((a, index) => (
                                 <div>
                                     <div className="my-2" key={index}>
                                         <input
@@ -136,12 +175,12 @@ export default function Quizz() {
                                             name="radio-101"
                                             value={a}
                                             checked={
-                                                listQuestion.question[currentQuestion]
+                                                listQuestion.question[currentQuestion - 1]
                                                     .yourChoice === a
                                             }
                                             onChange={(e) =>
                                                 selectedAnswer(
-                                                    listQuestion?.question[currentQuestion].id,
+                                                    listQuestion?.question[currentQuestion - 1].id,
                                                     e.target.value
                                                 )
                                             }
@@ -155,9 +194,17 @@ export default function Quizz() {
                     </div>
 
                     {/* Flag */}
+
                     <div className="flex ml-12 mt-12 text-xl">
                         <span className="mr-8">Phân vân</span>
-                        <AiOutlineFlag className="text-3xl" />
+                        <AiOutlineFlag
+                            className={`text-3xl ${
+                                listQuestion?.question[currentQuestion - 1].flag && "text-red-400"
+                            }`}
+                            onClick={() =>
+                                toggleFlag(listQuestion?.question[currentQuestion - 1].id)
+                            }
+                        />
                     </div>
 
                     {/* Back và Next button */}
@@ -165,7 +212,7 @@ export default function Quizz() {
                         <div className="flex justify-center items-center mx-4 my-2 px-4 py-2">
                             <button
                                 className={`btn btn-info btn-outline text-2xl mx-4 my-2 ${
-                                    currentQuestion <= 0 && "btn-disabled"
+                                    currentQuestion <= 1 && "btn-disabled"
                                 }`}
                             >
                                 <span className="pr-3" onClick={(e) => handlePreQuestion(e)}>
@@ -177,7 +224,7 @@ export default function Quizz() {
                         <div className="flex justify-center items-center mx-4 my-2 px-4 py-2">
                             <button
                                 className={`btn btn-info btn-outline text-2xl mx-4 my-2 ${
-                                    currentQuestion >= listQuestion?.question.length - 1 &&
+                                    currentQuestion >= listQuestion?.question.length &&
                                     "btn-disabled"
                                 }`}
                             >
@@ -191,12 +238,16 @@ export default function Quizz() {
                 </div>
             )}
 
+            {/* right side bar */}
             <div className="flex flex-col w-[500px] h-screen text-lg shadow-xl">
                 <div className="flex flex-col justify-center items-center mt-8 pt-8">
+                    <span className="mx-4 block my-4">
+                        Số câu đã làm:{" "}
+                        {listQuestion?.question.filter((q) => !!q?.yourChoice).length} /{" "}
+                        {listQuestion?.question.length}
+                    </span>
                     <span className="mx-4 block my-4">Lọc danh sách</span>
                     <select
-                        name=""
-                        id=""
                         defaultValue={"DEFAULT"}
                         onChange={(e) => handleFilterListQuestion(e.target.value)}
                         className="w-[172px] text-center select select-bordered max-w-md select-sm mb-2"
@@ -210,11 +261,25 @@ export default function Quizz() {
                         <option value={"flag"}>Phân vân</option>
                     </select>
                 </div>
-                <div className="overflow-scroll w-[90%] min-h-0 max-h-[300px] bg-orange-100 mt-5 pt-5 mx-auto flex justify-around flex-wrap font-mono">
-                    <button className="btn btn-outline mx-2 my-2 px-2 py-2 w-16">Câu 1</button>
+                <div className="overflow-scroll w-[90%] min-h-0 max-h-[300px] mt-5 pt-5 mx-auto flex justify-around flex-wrap font-mono">
+                    {filterQuestion?.question.map((q, i) => (
+                        <div className="mx-2" key={i}>
+                            <button
+                                className={`btn btn-outline mx-2 my-2 px-2 py-2 w-16 
+                            ${q.yourChoice ? "btn-primary" : ""}
+                            `}
+                                onClick={() => setCurrentQuestion(q.index)}
+                            >
+                                Câu {q.index}
+                            </button>
+                        </div>
+                    ))}
                 </div>
+
                 <div className="mt-10 pt-4 mx-auto shadow-sm">
-                    <button className="btn btn-outline btn-info">Nộp bài</button>
+                    <button className="btn btn-outline btn-info" onClick={() => finish()}>
+                        Nộp bài
+                    </button>
                 </div>
             </div>
         </div>

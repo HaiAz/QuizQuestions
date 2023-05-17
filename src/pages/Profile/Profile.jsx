@@ -17,10 +17,6 @@ function Profile() {
         setNavTitle("Thông tin cá nhân");
     }, []);
 
-    // const userDes = useSelector((state) => state.authSlice.description);
-    // const handleDescription = (value) => {
-    //     dispatch(setDescription(value));
-    // };
     return (
         <div className="hero min-h-screen bg-base-200 place-items-start">
             <div className="hero-content flex-col lg:flex-row">

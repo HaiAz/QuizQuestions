@@ -82,12 +82,12 @@ function ListExam() {
             {loading ? (
                 <div> ...loading</div>
             ) : (
-                <div className="flex flex-wrap justify-around mt-10">
+                <div className="flex flex-wrap justify-center mt-10">
                     {listExam?.map((item) => {
                         return (
                             <div
                                 key={item.id}
-                                className="max-w-[450px] card card-side bg-slate-200 shadow-xl mx-2 my-2 px-10"
+                                className="max-w-[450px] card card-side bg-red-100 shadow-xl mx-2 my-2 px-10"
                             >
                                 <figure className="w-40">
                                     <img
