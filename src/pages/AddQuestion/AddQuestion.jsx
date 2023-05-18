@@ -130,7 +130,7 @@ export default function AddQuestion() {
                         className="select select-accent w-full max-w-xs"
                         onChange={(e) => setDifficult(e.target.value)}
                     >
-                        <option value="DEFAULT" disabled selected>
+                        <option value="DEFAULT" disabled selected hidden>
                             Chọn độ khó
                         </option>
                         <option value={"easy"}>Dễ</option>
@@ -145,7 +145,7 @@ export default function AddQuestion() {
                         className="select select-warning w-full max-w-xs"
                         onChange={(e) => setSubject(e.target.value)}
                     >
-                        <option value="DEFAULT" disabled selected>
+                        <option value="DEFAULT" disabled selected hidden>
                             Chọn môn học
                         </option>
                         <option value={"math"}>Toán</option>

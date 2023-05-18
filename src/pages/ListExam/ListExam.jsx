@@ -97,13 +97,13 @@ function ListExam() {
                                 </figure>
                                 <div className="card-body px-2">
                                     <h2 className="card-title font-bold">{item.examName}</h2>
-                                    <div>
+                                    <div className="font-medium">
                                         <p className="my-2">Lớp: {item.className}</p>
                                         <p className="my-2">Thời gian làm bài: {item.time} phút</p>
                                         <p className="my-2">
                                             Số lượng câu hỏi: {item.numberQuestion} câu
                                         </p>
-                                        <p className="my-2">Coin: 20$</p>
+                                        {/* <p className="my-2">Coin: 20$</p> */}
                                     </div>
                                     <div
                                         className="card-actions justify-center mt-4"

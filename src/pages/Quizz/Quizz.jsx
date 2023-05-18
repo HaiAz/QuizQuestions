@@ -8,15 +8,11 @@ import { useAppContext } from "../../context/AppProvider";
 import { getDoc, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 export default function Quizz() {
     const { id } = useParams();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector((state) => state.authSlice.user);
 
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [listQuestion, setListQuestion] = useState();
     const [filterQuestion, setFilterQuestion] = useState(listQuestion);
-    const [yourSelected, setYourSelected] = useState();
-
     const { setNavTitle } = useAppContext();
 
     // Đang làm bài này thì không nhảy sang làm bài khác được
@@ -153,7 +149,7 @@ export default function Quizz() {
         });
 
         await updateDoc(userRef, { isTakingTest: {} });
-        navigate("/user/list-subjects");
+        navigate(`/user/exam-history`);
     };
     return (
         <div className="w-full h-full overflow-hidden flex justify-end">

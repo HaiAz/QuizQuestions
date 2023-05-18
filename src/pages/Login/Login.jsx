@@ -37,13 +37,13 @@ function Login() {
     // });
     return (
         <div className="w-full h-screen flex flex-row relative">
-            <p className="absolute top-10 right-10">
+            {/* <p className="absolute top-10 right-10">
                 Not a member?
                 <Link to="/sign-up" className="text-[#4f3cc9]">
                     {" "}
                     Sign up now
                 </Link>
-            </p>
+            </p> */}
             <div className=" bg-[#f1cdd7] h-screen hidden lg:w-5/12 lg:block md:w-2/3 md:block">
                 <div className="m-auto flex flex-col items-center pt-36">
                     {/* <p className="text-6xl font-bold text-[#cb4a4a] font-RubikGemStone">VNPT</p> */}
@@ -59,22 +59,23 @@ function Login() {
             </div>
             <div className="w-full h-screen bg-white flex items-center justify-center ">
                 <div className="w-1/2 lg:w-[400px] md:w-2/3">
-                    <p className="font-bold text-2xl text-center">Sign in</p>
+                    <p className="font-medium text-5xl text-center font-OleoScript">
+                        Login with Google
+                    </p>
                     <div className="mt-4 flex justify-center">
-                        <button className="bg-[#1a73e8] px-4 py-1 flex items-center justify-around rounded-md hover:bg-blue-400">
+                        {/* <button className="bg-[#1a73e8] px-4 py-1 flex items-center justify-around rounded-md hover:bg-blue-400"></button> */}
+                        <button className="btn btn-outline btn-error text-7xl h-full rounded-full border-sky-500">
+                            {" "}
                             <Link>
-                                <FaGooglePlusG
-                                    className="text-white text-3xl"
-                                    onClick={handleLoginWithGoogle}
-                                />
+                                <FaGooglePlusG className="" onClick={handleLoginWithGoogle} />
                             </Link>
                         </button>
-                        <button className="bg-stone-200 hover:bg-stone-300 px-4 py-4 ml-4 rounded-md">
+                        {/* <button className="bg-stone-200 hover:bg-stone-300 px-4 py-4 ml-4 rounded-md">
                             <FaTwitter className="text-gray-500 text-3xl" />
                         </button>
                         <button className="bg-stone-200 hover:bg-stone-300 px-4 py-4 ml-4 rounded-md">
                             <AiFillFacebook className="text-blue-700 text-3xl" />
-                        </button>
+                        </button> */}
                     </div>
 
                     {/* <div className="flex items-center my-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">

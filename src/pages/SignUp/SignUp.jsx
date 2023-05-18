@@ -122,6 +122,7 @@ function SignUp() {
                                 <p className="text-red-500 text-sm">{formik.errors.password}</p>
                             )}
                         </div>
+
                         <input
                             type="submit"
                             className="w-[200px] h-[40px] bg-[#ea4c89] text-white text-center rounded-md mt-6 font-bold hover:bg-[#eb73a1]"

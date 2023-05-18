@@ -14,7 +14,7 @@ import CreateExam from "../pages/CreateExam/CreateExam";
 import Quizz from "../pages/Quizz/Quizz";
 import ExamHistory from "../pages/History/ExamHistory";
 import ExamResult from "../pages/History/ExamResult";
-
+import SignUp from "./../pages/SignUp/SignUp";
 import { ProtectedRoute, AdminProtectedRoute } from "./ProtectedRoute";
 
 const AuthLayout = () => {
@@ -44,6 +44,14 @@ export const router = createBrowserRouter([
         element: (
             <AuthProvider>
                 <Login />
+            </AuthProvider>
+        ),
+    },
+    {
+        path: "sign-up",
+        element: (
+            <AuthProvider>
+                <SignUp />
             </AuthProvider>
         ),
     },

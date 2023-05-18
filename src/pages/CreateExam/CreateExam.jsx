@@ -36,7 +36,7 @@ function CreateExam() {
                 className,
                 question: [...exam].sort(() => -0.5 + Math.random()).slice(0, numberQuestion),
             }).then(() => {
-                alert("Them thanh cong");
+                alert("Thêm thành công");
             });
         } catch (err) {
             throw err;
@@ -84,7 +84,7 @@ function CreateExam() {
                     className="select select-accent w-full max-w-xs"
                     onChange={(e) => setSubject(e.target.value)}
                 >
-                    <option value="DEFAULT" disabled selected>
+                    <option value="DEFAULT" disabled selected hidden>
                         Chọn môn học
                     </option>
                     <option value={"math"}>Toán</option>
@@ -101,7 +101,7 @@ function CreateExam() {
                     className="select select-accent w-full max-w-xs"
                     onChange={(e) => setClassName(e.target.value)}
                 >
-                    <option value="DEFAULT" disabled selected>
+                    <option value="DEFAULT" disabled selected hidden>
                         Chọn lớp
                     </option>
                     <option value={"10"}>10</option>

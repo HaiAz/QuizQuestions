@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector, useDispatch } from "react-redux";
+import { MdAccountCircle } from "react-icons/md";
 import { auth } from "../../firebase/config";
 function Header() {
     const { handleLogout } = useAuthContext();
@@ -45,11 +46,15 @@ function Header() {
 
             <div className="dropdown dropdown-end mr-4">
                 <label tabIndex={0} className="m-1">
-                    <img
-                        src={userInfo.photoURL}
-                        className="w-12 rounded-full shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent"
-                        alt="avatar"
-                    />
+                    {checkAuth.isLogin ? (
+                        <img
+                            src={userInfo.photoURL}
+                            className="w-12 rounded-full shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent"
+                            alt="avatar"
+                        />
+                    ) : (
+                        <MdAccountCircle className="mx-4 rounded-full text-5xl shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent" />
+                    )}
                 </label>
                 <ul
                     tabIndex={0}

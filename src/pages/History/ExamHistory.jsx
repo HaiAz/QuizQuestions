@@ -37,7 +37,7 @@ function ExamHistory() {
                             <th>SỐ CÂU HỎI</th>
                             <th>SỐ CÂU TRẢ LỜI ĐÚNG</th>
                             <th>ĐIỂM</th>
-                            <th>CHI TIẾT</th>
+                            {/* <th>CHI TIẾT</th> */}
                         </tr>
                     </thead>
                     {quizzHistory?.map((item, index) => (
@@ -48,13 +48,13 @@ function ExamHistory() {
                                 <td>{item.numberQuestion}</td>
                                 <td>{item.correctAnswer}</td>
                                 <td>{item.calScore}</td>
-                                <td>
+                                {/* <td>
                                     <Link to={`/user/exam-history/${item.id}`}>
                                         <button className="btn btn-outline btn-error rounded-full border-none">
                                             XEM CHI TIẾT
                                         </button>
                                     </Link>
-                                </td>
+                                </td> */}
                             </tr>
                         </tbody>
                     ))}
