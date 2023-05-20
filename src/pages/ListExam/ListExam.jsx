@@ -80,7 +80,7 @@ function ListExam() {
     return (
         <>
             {loading ? (
-                <div> ...loading</div>
+                <div> ...</div>
             ) : (
                 <div className="flex flex-wrap justify-center mt-10">
                     {listExam?.map((item) => {

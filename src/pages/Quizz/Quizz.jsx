@@ -118,7 +118,7 @@ export default function Quizz() {
     };
 
     //Quay lại câu hỏi trước đó
-    const handlePreQuestion = (e) => {
+    const handlePrevQuestion = (e) => {
         if (currentQuestion >= 1) {
             setCurrentQuestion(currentQuestion - 1);
         } else {
@@ -210,7 +210,7 @@ export default function Quizz() {
                                     currentQuestion <= 1 && "btn-disabled"
                                 }`}
                             >
-                                <span className="pr-3" onClick={(e) => handlePreQuestion(e)}>
+                                <span className="pr-3" onClick={(e) => handlePrevQuestion(e)}>
                                     Back
                                 </span>
                                 <HiOutlineArrowSmLeft />
