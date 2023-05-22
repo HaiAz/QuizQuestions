@@ -25,6 +25,9 @@ function Profile() {
                         <span className="font-bold">Email: </span>
                         <Link to="">{userInfo.email}</Link>
                     </div>
+                    <Link to={"/admin"}>
+                        <button className="btn btn-circle btn-accent w-full">ADMIN PAGE</button>
+                    </Link>
                     {/* 
                     <label htmlFor="my-modal" className="btn">
                         Change your description!
