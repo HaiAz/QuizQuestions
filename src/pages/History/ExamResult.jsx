@@ -68,7 +68,6 @@ function ExamResult() {
         const getListQuestion = async () => {
             const docRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
             const docSnap = await getDoc(docRef);
-            setListQuestion(123456);
             setListQuestion({ ...docSnap.data() });
         };
         getListQuestion();
@@ -92,7 +91,6 @@ function ExamResult() {
             setCurrentQuestion(currentQuestion - 1);
         }
     };
-
     //Filter questions
     const handleChangeFilterQuestion = (filterValue) => {
         switch (filterValue) {
@@ -124,7 +122,10 @@ function ExamResult() {
                 break;
 
             case "uncompleted":
-                setFilterQuestion(listQuestion.question.filter((q) => !!!q.yourChoice));
+                setFilterQuestion({
+                    ...listQuestion,
+                    question: listQuestion.question.filter((q) => !!!q.yourChoice),
+                });
                 setCurrentQuestion(listQuestion.question.filter((q) => !!!q.yourChoice)[0].index);
                 break;
 
@@ -138,38 +139,8 @@ function ExamResult() {
                 <div>loading...</div>
             ) : (
                 <div className="w-full h-full overflow-hidden flex justify-end">
-                    {/* Nếu có thì mới render */}
-
+                    {/* Câu hỏi */}
                     <div className="flex-1 ">
-                        {/* <div className="flex flex-col justify-center items-start ml-8 mt-4">
-                                <div className="text-2xl">
-                                    {"Câu" +
-                                        ` ${currentQuestion}: ` +
-                                        listQuestion?.question[currentQuestion - 1]?.question}
-                                </div>
-                                <div className="flex flex-col mt-2">
-                                    {listQuestion?.question[currentQuestion - 1]?.answer.map(
-                                        (a, index) => (
-                                            <div>
-                                                <div className="my-2" key={index}>
-                                                    <input
-                                                        type="radio"
-                                                        name="radio-101"
-                                                        value={a}
-                                                        checked={
-                                                            listQuestion.question[
-                                                                currentQuestion - 1
-                                                            ].yourChoice === a
-                                                        }
-                                                        className="radio radio-success"
-                                                    />
-                                                    <span className="ml-3 text-xl">{a}</span>
-                                                </div>
-                                            </div>
-                                        )
-                                    )}
-                                </div>
-                            </div> */}
                         <Question currentQuestion={currentQuestion} listQuestion={listQuestion} />
 
                         {/* Back và Next button */}

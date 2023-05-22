@@ -13,8 +13,8 @@ function ListExam() {
     const [loading, setLoading] = useState(true);
     const [listExam, setListExam] = useState();
     // const [examID, setExamID] = useState();
-    const [history, setHistory] = useState();
-    const [listQuestion, setListQuestion] = useState([]);
+    const [check, setCheck] = useState();
+
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authSlice.user);
 
@@ -30,6 +30,11 @@ function ListExam() {
                 });
                 setListExam(arr);
                 setLoading(false);
+                if (arr.length === 0) {
+                    setCheck(true);
+                } else {
+                    setCheck(false);
+                }
             } catch (err) {
                 throw err;
             }
@@ -79,8 +84,15 @@ function ListExam() {
 
     return (
         <>
-            {loading ? (
-                <div> ...</div>
+            {check ? (
+                <div className="flex ">
+                    <img
+                        src={require("../../assets/Img/page.png")}
+                        alt="notfound"
+                        className="w-1/12"
+                    />
+                    <p>Không có bài kiểm tra nào cả</p>
+                </div>
             ) : (
                 <div className="flex flex-wrap justify-center mt-10">
                     {listExam?.map((item) => {

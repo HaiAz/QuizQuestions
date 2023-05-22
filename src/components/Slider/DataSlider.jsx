@@ -1,61 +1,61 @@
 export const dataSlider = [
     {
         id: 1,
-        title: "Nilou",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074319254368825465/nilou-genshin-impact-4k-wallpaper-uhdpaper.com-7301i.jpg",
     },
     {
         id: 2,
-        title: "Yoimiya",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074319254784069652/yoimiya-genshin-impact-1-4k-wallpaper-3840x2160-uhdpaper.com-653.1_b.jpg",
     },
     {
         id: 3,
-        title: "Eula",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074322414806249493/eula-genshin-impact-art-4k-wallpaper-uhdpaper.com-7220h.jpg",
     },
     {
         id: 4,
-        title: "Ayaka",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074322414210654239/ayaka-genshin-impact-game-4k-wallpaper-3840x2160-uhdpaper.com-515.1_c.jpg",
     },
     {
         id: 5,
-        title: "Ganyu",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074322415255035985/ganyu-genshin-impact-4k-wallpaper-3840x2160-uhdpaper.com-251.1_a.jpg",
     },
     {
         id: 6,
-        title: "Hutao",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074322415892578395/hu-tao-genshin-impact-game-4k-wallpaper-3840x2160-uhdpaper.com-514.1_c.jpg",
     },
     {
         id: 7,
-        title: "Nahida",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074322416773374023/nahida-genshin-impact-game-art-4k-wallpaper-uhdpaper.com-7291i.jpg",
     },
     {
         id: 8,
-        title: "Yae Miko",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074322417096343552/yae-miko-genshin-impact-art-4k-wallpaper-uhdpaper.com-7790h.jpg",
     },
     {
         id: 9,
-        title: "Ei",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074322864020410389/raiden-shogun-genshin-impact-0-4k-wallpaper-3840x2160-uhdpaper.com-623.1_b.jpg",
     },
     {
         id: 10,
-        title: "Kazuha",
+        title: "Say something...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1074319253995540500/kazuha-genshin-impact-1-4k-wallpaper-3840x2160-uhdpaper.com-659.1_b.jpg",
     },
