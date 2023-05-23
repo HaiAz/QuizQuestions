@@ -3,62 +3,62 @@ export const dataSlider = [
         id: 1,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074319254368825465/nilou-genshin-impact-4k-wallpaper-uhdpaper.com-7301i.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398375678980156/hinh-anh-dep-ve-hoc-tap-y-nghia-2.png",
     },
     {
         id: 2,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074319254784069652/yoimiya-genshin-impact-1-4k-wallpaper-3840x2160-uhdpaper.com-653.1_b.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398373321789450/anh-bia-chat.png",
     },
     {
         id: 3,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074322414806249493/eula-genshin-impact-art-4k-wallpaper-uhdpaper.com-7220h.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398373678297088/anh-bia-facebook-dep-2020-8-696x258.webp",
     },
     {
         id: 4,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074322414210654239/ayaka-genshin-impact-game-4k-wallpaper-3840x2160-uhdpaper.com-515.1_c.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398374240321568/anh-bia-facebook-ve-hoc-tap-dep-1.jpg",
     },
     {
         id: 5,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074322415255035985/ganyu-genshin-impact-4k-wallpaper-3840x2160-uhdpaper.com-251.1_a.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398374538137671/anh-nen-facebook-timeline-dep-27.jpg",
     },
     {
         id: 6,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074322415892578395/hu-tao-genshin-impact-game-4k-wallpaper-3840x2160-uhdpaper.com-514.1_c.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398375116931132/background-de-tai-hoc-tap_090657486.jpg",
     },
     {
         id: 7,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074322416773374023/nahida-genshin-impact-game-art-4k-wallpaper-uhdpaper.com-7291i.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398375397970021/goc-hoc-tap-cho-tre-e295.png",
     },
     {
         id: 8,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074322417096343552/yae-miko-genshin-impact-art-4k-wallpaper-uhdpaper.com-7790h.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398373036556328/1671584185_67_77-Anh-Bia-Cover-Anh-Bia-Facebook-Cover-Anime-Cute.jpg",
     },
     {
         id: 9,
         title: "Say something...",
         linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074322864020410389/raiden-shogun-genshin-impact-0-4k-wallpaper-3840x2160-uhdpaper.com-623.1_b.jpg",
+            "https://cdn.discordapp.com/attachments/941695759764553778/1110398375926452294/Hoc-tap-700.jpg",
     },
-    {
-        id: 10,
-        title: "Say something...",
-        linkImg:
-            "https://cdn.discordapp.com/attachments/941695759764553778/1074319253995540500/kazuha-genshin-impact-1-4k-wallpaper-3840x2160-uhdpaper.com-659.1_b.jpg",
-    },
+    // {
+    //     id: 10,
+    //     title: "Say something...",
+    //     linkImg:
+    //         "https://cdn.discordapp.com/attachments/941695759764553778/1074319253995540500/kazuha-genshin-impact-1-4k-wallpaper-3840x2160-uhdpaper.com-659.1_b.jpg",
+    // },
 ];
 
 export const settingSlideShow = {
@@ -70,7 +70,7 @@ export const settingSlideShow = {
     centerMode: true,
     className: "center",
     speed: 500,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2000,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,

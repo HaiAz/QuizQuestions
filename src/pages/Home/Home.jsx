@@ -27,7 +27,7 @@ export default function Home() {
                     </h1> */}
                     <div className="bg-[#4298b4] py-4 text-center w-full flex justify-center">
                         <p className="py-4 px-10 rounded-[30px] font-bold bg-[#88619a] text-white">
-                            <Link to="/user/list-exam" className="">
+                            <Link to="/user/list-subjects" className="">
                                 Take The Test
                             </Link>
                         </p>
@@ -51,7 +51,7 @@ export default function Home() {
                     </div>
                     <div className=" py-4 text-center w-full flex justify-center">
                         <p className="py-4 px-10 rounded-[30px] font-bold bg-[#88619a] text-white">
-                            <Link to="/quizz" className="">
+                            <Link to="/user/list-subjects" className="">
                                 Take The Test
                             </Link>
                         </p>
