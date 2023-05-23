@@ -1,20 +1,32 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector, useDispatch } from "react-redux";
 import { MdAccountCircle } from "react-icons/md";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
+import { getDoc, doc } from "firebase/firestore";
+import { BsCoin } from "react-icons/bs";
 function Header() {
     const { handleLogout } = useAuthContext();
-    const { navTitle, setNavTitle, navbarTitle } = useAppContext();
-    const dispatch = useDispatch();
+    const { navbarTitle } = useAppContext();
+    const [user, setUser] = useState();
     const checkAuth = useSelector((state) => state.authSlice.auth);
     const userInfo = useSelector((state) => state.authSlice.user);
     const location = useLocation();
+    useEffect(() => {
+        const getUser = async () => {
+            console.log(auth.currentUser.uid);
+            const userRef = doc(db, "users", auth.currentUser.uid);
+            const docRef = await getDoc(userRef);
+            setUser(docRef.data());
+        };
+        getUser();
+    }, []);
+    console.log(user);
     return (
         <div className="h-16 flex justify-between items-center bg-[#eeb9cb] z-50">
-            <div className="flex-1">
+            <div className="flex flex-1">
                 <label
                     htmlFor="my-drawer-2"
                     className={`${
@@ -43,9 +55,12 @@ function Header() {
                     {navbarTitle}
                 </div>
             </div>
-
             <div className="dropdown dropdown-end mr-4">
-                <label tabIndex={0} className="m-1">
+                <label tabIndex={0} className="m-1 flex justify-center items-center">
+                    <div className="m-2 pr-4 mr-8 font-mono font-semibold text-2xl">
+                        {!!user ? user.coin : ""}
+                        <BsCoin className="inline ml-2 text-yellow-300" />
+                    </div>
                     {checkAuth.isLogin ? (
                         <img
                             src={userInfo.photoURL}

@@ -124,10 +124,22 @@ export default function AddQuestion() {
                 </div>
             </div>
             <div className="mx-4">
+                <div className="form-control w-[320px] max-w-xs mx-4 my-2 py-2">
+                    <label className="label">
+                        <span className="label-text font-bold">Đáp án đúng</span>
+                    </label>
+                    <input
+                        value={correctAnswer}
+                        onChange={(e) => setCorrectAnswer(e.target.value)}
+                        type="text"
+                        placeholder="Đáp án đúng"
+                        className="input input-bordered w-full max-w-xs input-error"
+                    />
+                </div>
                 <div className="mx-2 my-2 px-2 py-2 w-full">
                     <select
                         defaultValue={"DEFAULT"}
-                        className="select select-accent w-full max-w-xs"
+                        className="select select-accent w-full max-w-xs text-center font-mono font-semibold"
                         onChange={(e) => setDifficult(e.target.value)}
                     >
                         <option value="DEFAULT" disabled selected hidden>
@@ -139,10 +151,10 @@ export default function AddQuestion() {
                     </select>
                 </div>
 
-                <div className="mx-2 my-2 px-2 py-2 w-full">
+                <div className="mx-2 my-2 px-2 py-2 w-full ">
                     <select
                         defaultValue={"DEFAULT"}
-                        className="select select-warning w-full max-w-xs"
+                        className="select select-warning w-full max-w-xs text-center font-semibold font-mono"
                         onChange={(e) => setSubject(e.target.value)}
                     >
                         <option value="DEFAULT" disabled selected hidden>
@@ -167,19 +179,6 @@ export default function AddQuestion() {
                         type="text"
                         placeholder="Nhập tên lớp"
                         className="input input-bordered w-full max-w-xs input-secondary"
-                    />
-                </div>
-
-                <div className="form-control w-full max-w-xs mx-4 my-2 py-2">
-                    <label className="label">
-                        <span className="label-text font-bold">Đáp án đúng</span>
-                    </label>
-                    <input
-                        value={correctAnswer}
-                        onChange={(e) => setCorrectAnswer(e.target.value)}
-                        type="text"
-                        placeholder="Đáp án đúng"
-                        className="input input-bordered w-full max-w-xs input-error"
                     />
                 </div>
 

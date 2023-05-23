@@ -5,39 +5,44 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/authSlice";
-import { authSlice } from "./../../redux/authSlice";
 import { useAppContext } from "../../context/AppProvider";
+import { setPageLoading } from "../../redux/loadingSlice";
+import { useNavigate } from "react-router-dom";
+import { BsCoin } from "react-icons/bs";
+
 function ListExam() {
     const { id } = useParams();
     const { setNavTitle } = useAppContext();
-    const [loading, setLoading] = useState(true);
     const [listExam, setListExam] = useState();
-    // const [examID, setExamID] = useState();
+    const [loading, setLoading] = useState();
     const [check, setCheck] = useState();
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authSlice.user);
-
     useEffect(() => {
         //Lấy danh sách bài kiểm tra
         const examRef = collection(db, `exams/${id}/exams`);
         const getExam = async () => {
             try {
+                dispatch(setPageLoading(10));
                 const arr = [];
                 const q = await getDocs(examRef);
                 q.forEach((doc) => {
                     arr.push({ ...doc.data(), id: doc.id });
                 });
+                dispatch(setPageLoading(30));
                 setListExam(arr);
-                setLoading(false);
                 if (arr.length === 0) {
                     setCheck(true);
                 } else {
                     setCheck(false);
                 }
+                dispatch(setPageLoading(70));
             } catch (err) {
                 throw err;
             }
+            dispatch(setPageLoading(100));
         };
         setNavTitle(`Danh sách bài kiểm tra`);
         getExam();
@@ -77,6 +82,7 @@ function ListExam() {
             await updateDoc(userRef, { isTakingTest });
             dispatch(setUser({ ...user, isTakingTest }));
             // setNavTitle(user?.isTakingTest.examName);
+            navigate(`/user/test/${examID}`);
         } catch (err) {
             console.log(err);
         }
@@ -85,21 +91,21 @@ function ListExam() {
     return (
         <>
             {check ? (
-                <div className="flex ">
+                <div className="flex font-mono justify-center items-center mt-96 pt-5 font-semibold ">
                     <img
                         src={require("../../assets/Img/page.png")}
                         alt="notfound"
                         className="w-1/12"
                     />
-                    <p>Không có bài kiểm tra nào cả</p>
+                    <p className="text-3xl ml-4">Không có bài kiểm tra nào cả</p>
                 </div>
             ) : (
-                <div className="flex flex-wrap justify-center mt-10">
+                <div className="flex flex-wrap justify-center mt-10 ">
                     {listExam?.map((item) => {
                         return (
                             <div
                                 key={item.id}
-                                className="max-w-[450px] card card-side bg-red-100 shadow-xl mx-2 my-2 px-10"
+                                className="max-w-[450px] card card-side bg-red-100 shadow-xl mx-2 my-2 px-10 "
                             >
                                 <figure className="w-40">
                                     <img
@@ -115,13 +121,17 @@ function ListExam() {
                                         <p className="my-2">
                                             Số lượng câu hỏi: {item.numberQuestion} câu
                                         </p>
-                                        {/* <p className="my-2">Coin: 20$</p> */}
+                                        {/* <p className="my-2">
+                                            Coin: {item.coin} <BsCoin className="inline" />
+                                        </p> */}
                                     </div>
                                     <div
                                         className="card-actions justify-center mt-4"
                                         onClick={() => startExam(item.id)}
                                     >
-                                        <Link to={`/user/test/${item.id}`}>
+                                        <Link
+                                        // to={`/user/test/${item.id}`}
+                                        >
                                             <button className="btn btn-primary">Bắt đầu làm</button>
                                         </Link>
                                     </div>

@@ -15,11 +15,22 @@ import Quizz from "../pages/Quizz/Quizz";
 import ExamHistory from "../pages/History/ExamHistory";
 import ExamResult from "../pages/History/ExamResult";
 import SignUp from "./../pages/SignUp/SignUp";
+import LoadingBar from "react-top-loading-bar";
 import { ProtectedRoute, AdminProtectedRoute } from "./ProtectedRoute";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setPageLoading } from "../redux/loadingSlice";
 const AuthLayout = () => {
+    const dispatch = useDispatch();
+    const loading = useSelector((state) => state.loadingSlice.loading);
     return (
         <AuthProvider>
+            <LoadingBar
+                color="#ff007d"
+                height={5}
+                progress={loading}
+                waitingTime={1000}
+                onLoaderFinished={() => dispatch(setPageLoading(0))}
+            />
             <UserDrawer />
         </AuthProvider>
     );

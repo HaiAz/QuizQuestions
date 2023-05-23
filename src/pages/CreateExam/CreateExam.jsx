@@ -8,6 +8,7 @@ function CreateExam() {
     const [numberQuestion, setNumberQuestion] = useState(null);
     const [subject, setSubject] = useState(null);
     const [className, setClassName] = useState(null);
+    const [coin, setCoin] = useState(null);
 
     const { setNavTitle } = useAppContext();
     useEffect(() => {
@@ -34,6 +35,7 @@ function CreateExam() {
                 numberQuestion,
                 subject,
                 className,
+                coin,
                 question: [...exam].sort(() => -0.5 + Math.random()).slice(0, numberQuestion),
             }).then(() => {
                 alert("Thêm thành công");
@@ -76,6 +78,17 @@ function CreateExam() {
                     placeholder="Số lượng câu hỏi"
                     className="input input-bordered w-full max-w-xs"
                     onChange={(e) => setNumberQuestion(e.target.value)}
+                />
+            </div>
+            <div className="mx-2 px-2  form-control w-full max-w-xs">
+                <label className="label font-bold">
+                    <span className="label-text">Số tiền</span>
+                </label>
+                <input
+                    type="text"
+                    placeholder="Số tiền"
+                    className="input input-bordered w-full max-w-xs"
+                    onChange={(e) => setCoin(e.target.value)}
                 />
             </div>
             <div className="mx-4  mt-4 mb-2 py-2 w-[304px]">

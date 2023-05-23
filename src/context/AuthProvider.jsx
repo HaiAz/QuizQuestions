@@ -35,6 +35,7 @@ function AuthProvider({ children }) {
                     email,
                     photoURL,
                     uid,
+                    coin: 3000,
                     role: "USER",
                 });
             }

@@ -15,4 +15,4 @@ export const loadingSlice = createSlice({
 });
 
 export const { setPageLoading } = loadingSlice.actions;
-export default loadingSlice.reducers;
+export default loadingSlice.reducer;
