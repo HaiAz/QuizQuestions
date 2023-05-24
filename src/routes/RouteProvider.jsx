@@ -15,7 +15,10 @@ import Quizz from "../pages/Quizz/Quizz";
 import ExamHistory from "../pages/History/ExamHistory";
 import ExamResult from "../pages/History/ExamResult";
 import SignUp from "./../pages/SignUp/SignUp";
+import ForgotPassword from "./../pages/ForgotPassword/ForgotPassword";
+import Clock from "../clock";
 import LoadingBar from "react-top-loading-bar";
+import NotiModal from "../components/Modal/NotiModal";
 import { ProtectedRoute, AdminProtectedRoute } from "./ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { setPageLoading } from "../redux/loadingSlice";
@@ -67,6 +70,14 @@ export const router = createBrowserRouter([
         ),
     },
     {
+        path: "forgot-password",
+        element: (
+            <AuthProvider>
+                <ForgotPassword />
+            </AuthProvider>
+        ),
+    },
+    {
         path: "/",
         element: (
             <AuthProvider>
@@ -79,6 +90,14 @@ export const router = createBrowserRouter([
         element: (
             <AuthProvider>
                 <Home />
+            </AuthProvider>
+        ),
+    },
+    {
+        path: "/noti",
+        element: (
+            <AuthProvider>
+                <NotiModal />
             </AuthProvider>
         ),
     },
@@ -117,6 +136,10 @@ export const router = createBrowserRouter([
                     {
                         path: "/user/test/:id",
                         element: <Quizz />,
+                    },
+                    {
+                        path: "/user/clock",
+                        element: <Clock />,
                     },
                 ],
             },

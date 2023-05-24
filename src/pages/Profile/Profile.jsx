@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector, useDispatch } from "react-redux";
-
+import { BsCoin } from "react-icons/bs";
 function Profile() {
     const userInfo = useSelector((state) => state.authSlice.user);
     const { setNavTitle } = useAppContext();
@@ -16,43 +16,27 @@ function Profile() {
             <div className="hero-content flex-col lg:flex-row">
                 <img
                     src={userInfo.photoURL}
-                    className="max-w-sm rounded-lg shadow-3xl"
+                    className="max-w-sm rounded-full shadow-3xl w-36"
                     alt="avatar"
                 />
-                <div className="w-64">
+                <div className="w-96 ">
                     <h1 className="text-3xl font-bold">{userInfo.displayName}</h1>
-                    <div className="py-2">
-                        <span className="font-bold">Email: </span>
-                        <Link to="">{userInfo.email}</Link>
+                    <div className="py-2 font-semibold text-xl">
+                        <div className="flex">
+                            <p>Email: </p>
+                            <span className="font-normal ml-2">{userInfo.email}</span>
+                        </div>
+                        <div className="flex mt-2">
+                            <p className="">Coin:</p>
+                            <span className="font-normal ml-2">
+                                {userInfo.coin}{" "}
+                                <BsCoin className="inline ml-1 text-yellow-500 text-3xl" />
+                            </span>
+                        </div>
                     </div>
                     <Link to={"/admin"}>
-                        <button className="btn btn-circle btn-accent w-full">ADMIN PAGE</button>
+                        <button className="btn btn-circle btn-accent w-40">ADMIN PAGE</button>
                     </Link>
-                    {/* 
-                    <label htmlFor="my-modal" className="btn">
-                        Change your description!
-                    </label>
-
-                    <input type="checkbox" id="my-modal" className="modal-toggle" />
-                    <div className="modal">
-                        <div className="modal-box">
-                            <input
-                                type="text"
-                                placeholder="Type here"
-                                className="input input-bordered input-secondary w-full max-w-xs"
-                                onChange={(e) => setInputValue(e.target.value)}
-                            />
-                            <div className="modal-action">
-                                <label
-                                    htmlFor="my-modal"
-                                    className="btn"
-                                    onClick={() => handleDescription(inputValue)}
-                                >
-                                    Yay!
-                                </label>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>

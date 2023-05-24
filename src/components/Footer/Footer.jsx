@@ -3,8 +3,8 @@ import { BsFacebook, BsTwitter, BsInstagram, BsYoutube, BsTelegram } from "react
 import { Link } from "react-router-dom";
 function Footer() {
     return (
-        <div className="pt-12 w-full bg-[#65c3c8]">
-            <div className="flex flex-col items-center justify-center italic text-black text-[16px]">
+        <div className="pt-12 w-full bg-[#65c3c8] h-[600px]">
+            <div className="flex flex-col items-center justify-center italic text-black text-[16px] py-2 my-2 h-[400px]">
                 <div className="mb-2 flex flex-col justify-center items-center">
                     <svg
                         width="50"
@@ -22,43 +22,47 @@ function Footer() {
                     <p className="text-[#00393c]">Copyright © 2023 - All right reserved</p>
                 </div>
 
-                <div className="mb-2 font-medium">
-                    <Link to="https://www.facebook.com/aBci.iXyZ/" className=" hover:text-[18px]">
+                <div className="mb-2 py-2 font-medium ">
+                    <Link
+                        to="https://www.facebook.com/aBci.iXyZ/"
+                        className=" hover:text-[18px]"
+                        target="_blank"
+                    >
                         Contact
                     </Link>
                 </div>
 
-                <div className="mb-2 font-medium">
+                <div className="mb-2 py-2 font-medium">
                     <Link to="#" className=" hover:text-[18px]">
                         Testimonials
                     </Link>
                 </div>
 
-                <div className="mb-2 font-medium">
+                <div className="mb-2 py-2 font-medium">
                     <Link to="#" className=" hover:text-[18px]">
                         Terms & Conditions
                     </Link>
                 </div>
 
-                <div className="mb-2 font-medium">
+                <div className="mb-2 py-2 font-medium">
                     <Link to="#" className=" hover:text-[18px]">
                         Privacy Policy
                     </Link>
                 </div>
 
-                <div className="mb-2 font-medium">
+                <div className="mb-2 py-2 font-medium">
                     <Link to="#" className=" hover:text-[18px]">
                         For Teams
                     </Link>
                 </div>
 
-                <div className="mb-2 font-medium">
+                <div className="mb-2 py-2 font-medium">
                     <Link to="#" className=" hover:text-[18px]">
                         Join Us!
                     </Link>
                 </div>
             </div>
-            <div className="flex justify-center mt-4 pt-2">
+            <div className="flex justify-center mt-4 pt-2 py-2 px-2 h-[100px]">
                 <div className="w-5 px-4 py-4 mx-6 my-2 text-2xl hover:text-3xl">
                     <Link
                         to="https://www.facebook.com/aBci.iXyZ/"

@@ -31,22 +31,34 @@ function AdminDrawer() {
                             </span>
                         </Link>
                     </div>
-                    <ul className="menu menu-compact p-4 w-80 text-base-content sticky">
+                    <ul className="menu menu-compact p-4 w-80 text-base-content sticky font-mono font-semibold">
                         {/* <!-- Sidebar content here --> */}
                         <li className={`${location.pathname === "/" && "active:"}`}>
-                            <Link className="text-lg" to="/home">
+                            <Link className={`text-lg`} to="/home">
                                 Trang chủ
                             </Link>
                         </li>
                         <li
-                            className={`${location.pathname === "admin/add-question" && "active:"}`}
+                            className={`${
+                                location.pathname === "/admin/add-question" && "active:"
+                            }`}
                         >
-                            <Link className="text-lg" to="/admin/add-question">
+                            <Link
+                                className={`text-lg  ${
+                                    location.pathname === "/admin/add-question" && "bg-red-200"
+                                }`}
+                                to="/admin/add-question"
+                            >
                                 Thêm câu hỏi
                             </Link>
                         </li>
                         <li className={`${location.pathname === "admin/create-exam" && "active:"}`}>
-                            <Link className="text-lg" to="/admin/create-exam">
+                            <Link
+                                className={`text-lg ${
+                                    location.pathname === "/admin/create-exam" && "bg-red-200"
+                                }`}
+                                to="/admin/create-exam"
+                            >
                                 Tạo đề thi
                             </Link>
                         </li>

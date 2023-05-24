@@ -31,20 +31,42 @@ function UserDrawer() {
                             </span>
                         </Link>
                     </div>
-                    <ul className="menu menu-compact p-4 w-80 text-base-content sticky font-mono ">
+                    <ul className="menu menu-compact p-4 w-80 text-base-content sticky font-mono font-semibold">
                         {/* <!-- Sidebar content here --> */}
                         <li className={`${location.pathname === "/" && "active"}`}>
                             <Link className="text-lg" to="/home">
                                 Trang chủ
                             </Link>
                         </li>
-                        <li className={`${location.pathname === "/user/list-exam" && "active"}`}>
-                            <Link className="text-lg" to="/user/list-subjects">
+                        <li className={`${location.pathname === "/user/profile" && "active"}`}>
+                            <Link
+                                className={`text-lg ${
+                                    location.pathname === "/user/profile" && "bg-red-200"
+                                }`}
+                                to="/user/profile"
+                            >
+                                Thông tin cá nhân
+                            </Link>
+                        </li>
+                        <li
+                            className={`${location.pathname === "/user/list-subjects" && "active"}`}
+                        >
+                            <Link
+                                className={`text-lg ${
+                                    location.pathname === "/user/list-subjects" && "bg-red-200"
+                                }`}
+                                to="/user/list-subjects"
+                            >
                                 Danh sách các môn học
                             </Link>
                         </li>
                         <li className={`${location.pathname === "/user/exam-history" && "active"}`}>
-                            <Link className="text-lg" to="/user/exam-history">
+                            <Link
+                                className={`text-lg ${
+                                    location.pathname === "/user/exam-history" && "bg-red-200"
+                                }`}
+                                to="/user/exam-history"
+                            >
                                 Lịch sử làm bài
                             </Link>
                         </li>

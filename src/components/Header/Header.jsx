@@ -14,16 +14,15 @@ function Header() {
     const checkAuth = useSelector((state) => state.authSlice.auth);
     const userInfo = useSelector((state) => state.authSlice.user);
     const location = useLocation();
-    useEffect(() => {
-        const getUser = async () => {
-            console.log(auth.currentUser.uid);
-            const userRef = doc(db, "users", auth.currentUser.uid);
-            const docRef = await getDoc(userRef);
-            setUser(docRef.data());
-        };
-        getUser();
-    }, []);
-    console.log(user);
+    console.log(userInfo);
+    // useEffect(() => {
+    //     const getUser = async () => {
+    //         const userRef = doc(db, "users", auth.currentUser.uid);
+    //         const docRef = await getDoc(userRef);
+    //         setUser(docRef.data());
+    //     };
+    //     getUser();
+    // }, []);
     return (
         <div className="h-16 flex justify-between items-center bg-[#eeb9cb] z-50">
             <div className="flex flex-1">
@@ -57,16 +56,29 @@ function Header() {
             </div>
             <div className="dropdown dropdown-end mr-4">
                 <label tabIndex={0} className="m-1 flex justify-center items-center">
-                    <div className="m-2 pr-4 mr-8 font-mono font-semibold text-2xl">
-                        {!!user ? user.coin : ""}
-                        <BsCoin className="inline ml-2 text-yellow-300" />
+                    <div>
+                        {/* {!!user ? (
+                            <div>
+                                {userInfo.coin}
+                                <BsCoin className="inline ml-2 text-yellow-300" />
+                            </div>
+                        ) : (
+                            ""
+                        )} */}
                     </div>
                     {checkAuth.isLogin ? (
-                        <img
-                            src={userInfo.photoURL}
-                            className="w-12 rounded-full shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent"
-                            alt="avatar"
-                        />
+                        <div className="flex">
+                            <div className="m-2 pr-4 mr-8 font-mono font-semibold text-2xl">
+                                {userInfo.coin}
+                                <BsCoin className="inline ml-2 text-yellow-300" />
+                            </div>
+
+                            <img
+                                src={userInfo.photoURL}
+                                className="w-12 rounded-full shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent"
+                                alt="avatar"
+                            />
+                        </div>
                     ) : (
                         <MdAccountCircle className="mx-4 rounded-full text-5xl shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent" />
                     )}

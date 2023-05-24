@@ -4,16 +4,19 @@ import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import { useParams, useNavigate } from "react-router-dom";
 import { db, auth } from "../../firebase/config";
 import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/authSlice";
 import { useAppContext } from "../../context/AppProvider";
 import { getDoc, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 export default function Quizz() {
     const { id } = useParams();
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [listQuestion, setListQuestion] = useState();
     const [filterQuestion, setFilterQuestion] = useState(listQuestion);
     const { setNavTitle } = useAppContext();
+    const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
+    const user = useSelector((state) => state.authSlice.user);
 
     // Đang làm bài này thì không nhảy sang làm bài khác được
     // useEffect(() => {
@@ -21,7 +24,6 @@ export default function Quizz() {
     //         navigate("/user");
     //     }
     // });
-    const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
 
     //Lấy danh sách câu hỏi bài kiểm tra
     useEffect(() => {
@@ -97,7 +99,6 @@ export default function Quizz() {
     //Set dữ liệu ban đầu cho filterQuestion
     useEffect(() => {
         const getData = async () => {
-            const docRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
             const docSnap = await getDoc(historyRef);
             if (docSnap.exists()) {
                 setFilterQuestion({ ...docSnap.data(), id: docSnap.id });
@@ -138,17 +139,14 @@ export default function Quizz() {
         ).length;
         const calScore = (pointPerQuestion * correctAnswer).toFixed(3);
 
-        console.log("point:" + pointPerQuestion);
-        console.log("correct: " + correctAnswer);
-        console.log(calScore);
-
         await setDoc(historyRef, {
             ...listQuestion,
             calScore,
             correctAnswer,
         });
-
+        const isTakingTest = {};
         await updateDoc(userRef, { isTakingTest: {} });
+        dispatch(setUser({ ...user, isTakingTest }));
         navigate(`/user/exam-history`);
     };
     return (
@@ -164,26 +162,24 @@ export default function Quizz() {
                         </div>
                         <div className="flex flex-col mt-2">
                             {listQuestion?.question[currentQuestion - 1]?.answer.map((a, index) => (
-                                <div>
-                                    <div className="my-2" key={index}>
-                                        <input
-                                            type="radio"
-                                            name="radio-101"
-                                            value={a}
-                                            checked={
-                                                listQuestion.question[currentQuestion - 1]
-                                                    .yourChoice === a
-                                            }
-                                            onChange={(e) =>
-                                                selectedAnswer(
-                                                    listQuestion?.question[currentQuestion - 1].id,
-                                                    e.target.value
-                                                )
-                                            }
-                                            className="radio radio-success"
-                                        />
-                                        <span className="ml-3 text-xl">{a}</span>
-                                    </div>
+                                <div className="my-2" key={index}>
+                                    <input
+                                        type="radio"
+                                        name="radio-101"
+                                        value={a}
+                                        checked={
+                                            listQuestion.question[currentQuestion - 1]
+                                                .yourChoice === a
+                                        }
+                                        onChange={(e) =>
+                                            selectedAnswer(
+                                                listQuestion?.question[currentQuestion - 1].id,
+                                                e.target.value
+                                            )
+                                        }
+                                        className="radio radio-success"
+                                    />
+                                    <span className="ml-3 text-xl">{a}</span>
                                 </div>
                             ))}
                         </div>

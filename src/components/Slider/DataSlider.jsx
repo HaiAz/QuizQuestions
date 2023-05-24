@@ -65,7 +65,7 @@ export const settingSlideShow = {
     dots: true,
     infinite: true,
     autoplay: true,
-    fade: true,
+    fade: false,
     pauseOnHover: true,
     centerMode: true,
     className: "center",

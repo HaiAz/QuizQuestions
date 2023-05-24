@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import SubjectSlideShow from "../../components/Slider/SubjectSlideShow";
 import Header from "../../components/Header/Header";
 import SlideShow from "../../components/Slider/SlideShow";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { auth, db } from "../../firebase/config";
 import { getDocs, doc, collection, where, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
@@ -9,17 +9,34 @@ import { useAppContext } from "../../context/AppProvider";
 import { setPageLoading } from "../../redux/loadingSlice";
 import { useNavigate } from "react-router-dom";
 import { BsCoin } from "react-icons/bs";
+import NotiModal from "./../../components/Modal/NotiModal";
 
 function ListExam() {
     const { id } = useParams();
     const { setNavTitle } = useAppContext();
     const [listExam, setListExam] = useState();
     const [loading, setLoading] = useState();
+    const [userInfo, setUserInfo] = useState();
     const [check, setCheck] = useState();
     const navigate = useNavigate();
-
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [modalContent, setModalContent] = useState({
+        title: "1",
+        description: "",
+    });
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authSlice.user);
+
+    useEffect(() => {
+        const getUserInfo = async () => {
+            const userRef = doc(db, "users", `${auth.currentUser.uid}`);
+            const getUser = await getDoc(userRef);
+            setUserInfo(getUser.data());
+        };
+
+        getUserInfo();
+    }, []);
+
     useEffect(() => {
         //Lấy danh sách bài kiểm tra
         const examRef = collection(db, `exams/${id}/exams`);
@@ -48,13 +65,29 @@ function ListExam() {
         getExam();
     }, []);
 
-    const startExam = async (examID) => {
+    //close modal
+    const closeModal = useCallback(() => setIsOpenModal(false), []);
+
+    //Khi ấn làm bài
+    const startExam = async (examID, coin) => {
         try {
-            const q = [];
-            const userRef = doc(db, "users", auth.currentUser.uid);
+            const userRef = doc(db, "users", `${auth.currentUser.uid}`);
             const examRef = doc(db, "exams", `${id}/exams/${examID}`);
             const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${examID}`);
             const exam = await getDoc(examRef);
+            const user = await getDoc(userRef);
+
+            // if (+user.coin < +coin) {
+            //     alert("Bạn không đủ coin để làm bài thi này!");
+            //     return;
+            // }
+            console.log(coin);
+            setLoading(examID);
+            if (+user.coin < +coin) {
+                alert("Bạn không đủ coin để làm bài thi này!");
+                setLoading("");
+                return;
+            }
 
             //tạo lịch sử làm bài
             await setDoc(historyRef, {
@@ -69,22 +102,20 @@ function ListExam() {
                     index: i + 1,
                 })),
             });
-
             //trạng thái của user lúc làm bài
             const isTakingTest = {
                 status: true,
-                examName: exam.data().examName,
-                time: exam.data().time,
+                examName: exam?.data().examName,
+                time: exam?.data().time,
                 examID,
             };
 
             //update trạng thái user
             await updateDoc(userRef, { isTakingTest });
-            dispatch(setUser({ ...user, isTakingTest }));
-            // setNavTitle(user?.isTakingTest.examName);
+            dispatch(setUser({ ...user.data(), isTakingTest }));
             navigate(`/user/test/${examID}`);
         } catch (err) {
-            console.log(err);
+            console.log("Lỗi: ", err);
         }
     };
 
@@ -125,15 +156,19 @@ function ListExam() {
                                             Coin: {item.coin} <BsCoin className="inline" />
                                         </p> */}
                                     </div>
-                                    <div
-                                        className="card-actions justify-center mt-4"
-                                        onClick={() => startExam(item.id)}
-                                    >
-                                        <Link
-                                        // to={`/user/test/${item.id}`}
+                                    <div className="card-actions justify-center mt-4 uppercase">
+                                        <button
+                                            className={`btn btn-primary ${
+                                                loading === item.id && "loading"
+                                            }`}
+                                            onClick={() => startExam(item.id, item.coin)}
                                         >
-                                            <button className="btn btn-primary">Bắt đầu làm</button>
-                                        </Link>
+                                            {user?.isTakingTest?.examID === item.id
+                                                ? "Tiếp tục làm bài!"
+                                                : loading === item.id
+                                                ? "Đang bắt đầu!"
+                                                : "Bắt đầu làm!"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -141,6 +176,7 @@ function ListExam() {
                     })}
                 </div>
             )}
+            {/* <isOpenModal isOpen={isOpenModal} closeModal={closeModal} modalContent={modalContent} /> */}
         </>
     );
 }
