@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { auth, db } from "../../firebase/config";
 import { getDoc, doc } from "firebase/firestore";
 import { useAppContext } from "../../context/AppProvider";
-import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from "react-icons/ai";
@@ -18,17 +17,31 @@ const Question = ({ currentQuestion, listQuestion }) => {
             <div className="flex flex-col mt-2">
                 {listQuestion?.question[currentQuestion - 1]?.answer.map((a, index) => (
                     <div>
-                        <div className="my-2" key={index}>
-                            <input
-                                type="radio"
-                                name="radio-101"
-                                value={a}
-                                checked={
-                                    listQuestion.question[currentQuestion - 1].yourChoice === a
-                                }
-                                className="radio radio-success"
-                            />
-                            <span className="ml-3 text-xl">{a}</span>
+                        <div className="flex items-center">
+                            <div className="my-2" key={index}>
+                                <input
+                                    readOnly
+                                    type="radio"
+                                    name="radio-101"
+                                    value={a}
+                                    checked={
+                                        listQuestion.question[currentQuestion - 1].yourChoice === a
+                                    }
+                                    className="radio radio-success"
+                                />
+                                <span className="ml-3 text-xl">{a}</span>
+                            </div>
+                            {a === listQuestion.question[currentQuestion - 1].correctAnswer ? (
+                                <AiOutlineCheckCircle className="ml-10 text-3xl text-green-700" />
+                            ) : (
+                                ""
+                            )}
+                            {a !== listQuestion.question[currentQuestion - 1].correctAnswer &&
+                            listQuestion.question[currentQuestion - 1].yourChoice === a ? (
+                                <AiOutlineCloseCircle className="ml-10 text-3xl text-red-500" />
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                 ))}
@@ -147,27 +160,29 @@ function ExamResult() {
                         <div className="flex justify-start items-center">
                             <div className="flex justify-center items-center mx-4 my-2 px-4 py-2">
                                 <button
-                                    className={`btn btn-info btn-outline text-2xl mx-4 my-2 ${
+                                    className={`btn btn-ghost btn-outline text-2xl mx-4 my-2 ${
                                         currentQuestion <= 1 && "btn-disabled"
                                     }`}
+                                    onClick={(e) => handlePrevQuestion(e)}
                                 >
-                                    <span className="pr-3" onClick={(e) => handlePrevQuestion(e)}>
+                                    {/* <span className="pr-3" >
                                         Back
-                                    </span>
+                                    </span> */}
                                     <HiOutlineArrowSmLeft />
                                 </button>
                             </div>
                             <div className="flex justify-center items-center mx-4 my-2 px-4 py-2">
                                 <button
-                                    className={`btn btn-info btn-outline text-2xl mx-4 my-2 ${
+                                    className={`btn btn-ghost btn-outline text-2xl mx-4 my-2 ${
                                         currentQuestion >= listQuestion?.question.length &&
                                         "btn-disabled"
                                     }`}
+                                    onClick={(e) => handleNextQuestion(e)}
                                 >
                                     <HiOutlineArrowSmRight />
-                                    <span className="pl-3" onClick={(e) => handleNextQuestion(e)}>
+                                    {/* <span className="pl-3" >
                                         Next
-                                    </span>
+                                    </span> */}
                                 </button>
                             </div>
                         </div>

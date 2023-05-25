@@ -3,8 +3,11 @@ import { auth, db } from "../../firebase/config";
 import { getDocs, collection, query } from "firebase/firestore";
 import { useAppContext } from "../../context/AppProvider";
 import { Link } from "react-router-dom";
+import { setPageLoading } from "../../redux/loadingSlice";
+import { useDispatch } from "react-redux";
 function ExamHistory() {
     const { setNavTitle } = useAppContext();
+    const dispatch = useDispatch();
     const [quizzHistory, setQuizzHistory] = useState();
     const [list, setList] = useState(false);
 
@@ -13,14 +16,19 @@ function ExamHistory() {
     }, []);
 
     useEffect(() => {
+        dispatch(setPageLoading(10));
         const getHistory = async () => {
             const arr = [];
             const q = query(collection(db, `histories/${auth.currentUser.uid}/exams`));
             const querySnapShot = await getDocs(q);
+
+            dispatch(setPageLoading(30));
             querySnapShot.forEach((doc) => {
                 arr.push({ ...doc.data(), id: doc.id });
             });
+            dispatch(setPageLoading(50));
             setQuizzHistory(arr);
+            dispatch(setPageLoading(100));
             if (arr.length === 0) {
                 setList(true);
             } else {

@@ -25,10 +25,11 @@ import { setPageLoading } from "../redux/loadingSlice";
 const AuthLayout = () => {
     const dispatch = useDispatch();
     const loading = useSelector((state) => state.loadingSlice.loading);
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
     return (
         <AuthProvider>
             <LoadingBar
-                color="#ff007d"
+                color={`#${randomColor}`}
                 height={5}
                 progress={loading}
                 waitingTime={1000}
