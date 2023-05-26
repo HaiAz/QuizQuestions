@@ -16,6 +16,7 @@ function ListExam() {
     const { setNavTitle } = useAppContext();
     const [listExam, setListExam] = useState();
     const [loading, setLoading] = useState();
+
     const [userInfo, setUserInfo] = useState();
     const [check, setCheck] = useState();
     const navigate = useNavigate();
@@ -24,6 +25,8 @@ function ListExam() {
         title: "1",
         description: "",
     });
+
+    const currentTime = new Date().getTime();
     const dispatch = useDispatch();
     const userSlice = useSelector((state) => state.authSlice.user);
 
@@ -39,6 +42,7 @@ function ListExam() {
 
     useEffect(() => {
         //Lấy danh sách bài kiểm tra
+
         const examRef = collection(db, `exams/${id}/exams`);
         const getExam = async () => {
             try {
@@ -65,6 +69,14 @@ function ListExam() {
         getExam();
     }, []);
 
+    //tính thời gian làm bài
+    const expiredTime = (now, expired) => {
+        const nextTime = now + expired * 60 * 1000;
+
+        //trả về timestamp thời điểm hết hạn
+        return nextTime;
+    };
+
     //close modal
     const closeModal = useCallback(() => setIsOpenModal(false), []);
 
@@ -78,20 +90,18 @@ function ListExam() {
             const exam = await getDoc(examRef);
             const user = await getDoc(userRef);
 
-            console.log(+user.data().coin);
-            console.log(+coin);
-            console.log(coin);
-
             dispatch(setPageLoading(30));
             setLoading(examID);
+
+            //check có đủ tiền hay không
             if (+user.data().coin < +coin) {
                 alert("Bạn không đủ coin để làm bài thi này!");
                 setLoading("");
                 dispatch(setPageLoading(100));
                 return;
             }
-            console.log(userSlice?.isTakingTest);
 
+            //check có đang làm bài thi khác hay không
             if (
                 userSlice?.isTakingTest?.status === true &&
                 userSlice?.isTakingTest?.examID !== examID
@@ -101,6 +111,13 @@ function ListExam() {
                 dispatch(setPageLoading(100));
                 return;
             }
+
+            //nếu đang làm bài ấn tiếp tục
+            if (userSlice?.isTakingTest?.status === true) {
+                navigate(`/user/test/${examID}`);
+                return;
+            }
+
             //tạo lịch sử làm bài
             await setDoc(historyRef, {
                 ...exam.data(),
@@ -115,6 +132,7 @@ function ListExam() {
                 })),
             });
             dispatch(setPageLoading(50));
+
             //trạng thái của user lúc làm bài
             const isTakingTest = {
                 status: true,
@@ -123,6 +141,7 @@ function ListExam() {
                 examID,
             };
             dispatch(setPageLoading(70));
+
             //update trạng thái user
             await updateDoc(userRef, { isTakingTest });
             dispatch(setUser({ ...user.data(), isTakingTest }));
