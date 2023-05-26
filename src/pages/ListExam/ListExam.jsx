@@ -29,7 +29,7 @@ function ListExam() {
     const currentTime = new Date().getTime();
     const dispatch = useDispatch();
     const userSlice = useSelector((state) => state.authSlice.user);
-    console.log("hehe: ", userSlice);
+
     useEffect(() => {
         const getUserInfo = async () => {
             const userRef = doc(db, "users", `${auth.currentUser.uid}`);
@@ -130,8 +130,8 @@ function ListExam() {
                     ...q,
                     index: i + 1,
                 })),
-                // startAt: currentTime / 1000,
-                // expiredTime: expiredTime(currentTime, exam.data().time) / 1000,
+                startAt: currentTime / 1000,
+                expiredTime: expiredTime(currentTime, exam.data().time) / 1000,
             });
             dispatch(setPageLoading(50));
 
@@ -140,6 +140,8 @@ function ListExam() {
                 status: true,
                 examName: exam?.data().examName,
                 time: exam?.data().time,
+                startAt: currentTime / 1000,
+                expiredTime: expiredTime(currentTime, exam.data().time) / 1000,
                 examID,
             };
             dispatch(setPageLoading(70));

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Countdown from "../../components/Countdown/Countdown";
 import { AiOutlineFlag, AiFillFlag } from "react-icons/ai";
 import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import { useParams, useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 import { useAppContext } from "../../context/AppProvider";
 import { getDoc, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+
 export default function Quizz() {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -153,7 +155,7 @@ export default function Quizz() {
         <div className="w-full h-full overflow-hidden flex justify-end">
             {/* Nếu có thì mới render */}
             {!!filterQuestion?.question?.length && (
-                <div className="flex-1 ">
+                <div className="flex-1">
                     <div className="flex flex-col justify-center items-start ml-8 mt-4">
                         <div className="text-2xl">
                             {"Câu" +
@@ -232,6 +234,15 @@ export default function Quizz() {
             {/* right side bar */}
             <div className="flex flex-col w-[500px] h-screen text-lg shadow-xl">
                 <div className="flex flex-col justify-center items-center mt-8 pt-8">
+                    <span className="mx-4 block my-4">Thời gian làm bài</span>
+
+                    {/* Thời gian làm bài */}
+                    <Countdown
+                        startAt={user?.isTakingTest?.startAt}
+                        endAt={user?.isTakingTest?.expiredTime}
+                        finish={finish}
+                    />
+
                     <span className="mx-4 block my-4">
                         Số câu đã làm:{" "}
                         {listQuestion?.question.filter((q) => !!q?.yourChoice).length} /{" "}

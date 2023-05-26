@@ -19,6 +19,7 @@ import ForgotPassword from "./../pages/ForgotPassword/ForgotPassword";
 import Clock from "../clock";
 import LoadingBar from "react-top-loading-bar";
 import NotiModal from "../components/Modal/NotiModal";
+import Countdown from "../components/Countdown/Countdown";
 import { ProtectedRoute, AdminProtectedRoute } from "./ProtectedRoute";
 import { useSelector, useDispatch } from "react-redux";
 import { setPageLoading } from "../redux/loadingSlice";
@@ -94,14 +95,7 @@ export const router = createBrowserRouter([
             </AuthProvider>
         ),
     },
-    {
-        path: "/noti",
-        element: (
-            <AuthProvider>
-                <NotiModal />
-            </AuthProvider>
-        ),
-    },
+
     {
         element: <AuthLayout />,
         children: [
@@ -109,6 +103,11 @@ export const router = createBrowserRouter([
                 path: "/user",
                 element: <ProtectedRoute />,
                 children: [
+                    { path: "/user/noti", element: <NotiModal /> },
+                    {
+                        path: "/user/countdown",
+                        element: <Countdown />,
+                    },
                     {
                         path: "/user",
                         element: <ListExam />,
