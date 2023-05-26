@@ -80,9 +80,7 @@ function AuthProvider({ children }) {
             }
         });
 
-        return () => {
-            unsubcribe();
-        };
+        return () => unsubcribe();
     }, []);
 
     const defaultValue = { handleLoginWithGoogle, handleLogout, loading };

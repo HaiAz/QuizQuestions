@@ -5550,7 +5550,7 @@ ignore@^5.2.0:
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.2.4.tgz"
   integrity sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==
 
-immer@9.0.21, immer@^9.0.16, immer@^9.0.7:
+immer@^9.0.16, immer@^9.0.7:
   version "9.0.21"
   resolved "https://registry.npmjs.org/immer/-/immer-9.0.21.tgz"
   integrity sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==
@@ -8348,25 +8348,6 @@ redent@^3.0.0:
   dependencies:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
-
-reduce-reducers@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/reduce-reducers/-/reduce-reducers-1.0.4.tgz"
-  integrity sha512-Mb2WZ2bJF597exiqX7owBzrqJ74DHLK3yOQjCyPAaNifRncE8OD0wFIuoMhXxTnHK07+8zZ2SJEKy/qtiyR7vw==
-
-redux-firestore@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/redux-firestore/-/redux-firestore-2.0.1.tgz"
-  integrity sha512-JWQkOYcvCuJNGOxpgCr8psbYZ69KhKQ5ednwOpgk0i6NSFSUVgLS/sGDqcx8t64uCL4EP7aA+hwLge7zPG7dJw==
-  dependencies:
-    immer "9.0.21"
-    lodash "^4.17.21"
-    reduce-reducers "^1.0.4"
-
-redux-persist@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/redux-persist/-/redux-persist-6.0.0.tgz"
-  integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
 
 redux-thunk@^2.4.2:
   version "2.4.2"

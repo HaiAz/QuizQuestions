@@ -2,15 +2,15 @@ import React, { memo, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useAppContext } from "../../context/AppProvider";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { MdAccountCircle } from "react-icons/md";
-import { auth, db } from "../../firebase/config";
-import { getDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import { doc, onSnapshot, getDoc } from "firebase/firestore";
 import { BsCoin } from "react-icons/bs";
 function Header() {
+    const [userData, setUserData] = useState();
     const { handleLogout } = useAuthContext();
     const { navbarTitle } = useAppContext();
-    const [user, setUser] = useState();
     const checkAuth = useSelector((state) => state.authSlice.auth);
     const userInfo = useSelector((state) => state.authSlice.user);
     const location = useLocation();
@@ -49,12 +49,11 @@ function Header() {
             <div className="dropdown dropdown-end mr-4">
                 <label tabIndex={0} className="m-1 flex justify-center items-center">
                     {checkAuth.isLogin ? (
-                        <div className="flex">
+                        <div className="flex ">
                             <div className="m-2 pr-4 mr-8 font-mono font-semibold text-2xl">
                                 {userInfo.coin}
                                 <BsCoin className="inline ml-2 text-yellow-300" />
                             </div>
-
                             <img
                                 src={userInfo.photoURL}
                                 className="w-12 rounded-full shadow-3xl hover:cursor-pointer hover:ring-red-500 ring-2 ring-transparent"
