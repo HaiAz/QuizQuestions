@@ -29,7 +29,7 @@ function ListExam() {
     const currentTime = new Date().getTime();
     const dispatch = useDispatch();
     const userSlice = useSelector((state) => state.authSlice.user);
-
+    console.log("hehe: ", userSlice);
     useEffect(() => {
         const getUserInfo = async () => {
             const userRef = doc(db, "users", `${auth.currentUser.uid}`);
@@ -130,6 +130,8 @@ function ListExam() {
                     ...q,
                     index: i + 1,
                 })),
+                // startAt: currentTime / 1000,
+                // expiredTime: expiredTime(currentTime, exam.data().time) / 1000,
             });
             dispatch(setPageLoading(50));
 
@@ -143,10 +145,12 @@ function ListExam() {
             dispatch(setPageLoading(70));
 
             //update trạng thái user
-            await updateDoc(userRef, { isTakingTest });
+            await updateDoc(userRef, { isTakingTest, coin: +user.data().coin - +coin });
             dispatch(setUser({ ...user.data(), isTakingTest }));
             dispatch(setPageLoading(100));
-            navigate(`/user/test/${examID}`);
+            window.location.href = `/user/test/${examID}`;
+            // window.location.reload();
+            // navigate(`/user/test/${examID}`);
         } catch (err) {
             console.log("Lỗi: ", err);
         }
@@ -185,9 +189,9 @@ function ListExam() {
                                         <p className="my-2">
                                             Số lượng câu hỏi: {item.numberQuestion} câu
                                         </p>
-                                        {/* <p className="my-2">
+                                        <p className="my-2">
                                             Coin: {item.coin} <BsCoin className="inline" />
-                                        </p> */}
+                                        </p>
                                     </div>
                                     <div className="card-actions justify-center mt-4 uppercase">
                                         <button
