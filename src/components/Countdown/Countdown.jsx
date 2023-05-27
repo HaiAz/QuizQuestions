@@ -20,13 +20,15 @@ function Countdown({ startAt, endAt, finish }) {
     }, []);
 
     const formatMinutes = (Math.floor(timeLeft / 60) % 60).toString().padStart(2, "0");
-    const formatSeconds = (timeLeft % 60).toString().padStart(2, "0");
+    const formatSeconds = Math.floor(timeLeft % 60)
+        .toString()
+        .padStart(2, "0");
     if (formatMinutes <= 0 && formatSeconds <= 0) {
         finish();
     }
 
     return (
-        <div className="w-60 h-10 bg-green-400 rounded-full flex justify-center">
+        <div className="w-28 h-10 bg-blue-300 rounded-full flex justify-center items-center font-semibold font-mono">
             <span>
                 {formatMinutes}:{formatSeconds}
             </span>

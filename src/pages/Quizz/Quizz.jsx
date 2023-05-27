@@ -19,13 +19,14 @@ export default function Quizz() {
     const { setNavTitle } = useAppContext();
     const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
     const user = useSelector((state) => state.authSlice.user);
-
+    const currentTime = new Date().getTime() / 1000;
     // Đang làm bài này thì không nhảy sang làm bài khác được
-    // useEffect(() => {
-    //     if (user?.isTakingTest.examID !== id) {
-    //         navigate("/user");
-    //     }
-    // });
+    useEffect(() => {
+        if (user?.isTakingTest.examID !== id) {
+            alert("Không thể truy cập vào bài kiểm tra này!");
+            navigate("/user/list-subjects");
+        }
+    });
 
     //Lấy danh sách câu hỏi bài kiểm tra
     useEffect(() => {
@@ -145,10 +146,10 @@ export default function Quizz() {
             ...listQuestion,
             calScore,
             correctAnswer,
+            isDone: true,
         });
-        const isTakingTest = {};
         await updateDoc(userRef, { isTakingTest: {} });
-        dispatch(setUser({ ...user, isTakingTest }));
+        // dispatch(setUser({ ...user, isTakingTest: {} }));
         navigate(`/user/exam-history`);
     };
     return (
@@ -238,7 +239,7 @@ export default function Quizz() {
 
                     {/* Thời gian làm bài */}
                     <Countdown
-                        startAt={user?.isTakingTest?.startAt}
+                        startAt={currentTime}
                         endAt={user?.isTakingTest?.expiredTime}
                         finish={finish}
                     />

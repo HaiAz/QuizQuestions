@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import SubjectSlideShow from "../../components/Slider/SubjectSlideShow";
 import Header from "../../components/Header/Header";
 import SlideShow from "../../components/Slider/SlideShow";
-import SideBar from "../../components/SideBar/SideBar";
 import Footer from "../../components/Footer/Footer";
+import Toast from "../../components/Toast/Toast";
+import { doc, getDoc } from "firebase/firestore";
 import { useAppContext } from "../../context/AppProvider";
+import { Link } from "react-router-dom";
+
 export default function Home() {
     const { setNavTitle } = useAppContext();
     useEffect(() => {
@@ -15,7 +17,6 @@ export default function Home() {
     return (
         <div id="Home" className="w-full min-h-screen relative overflow-hidden">
             <Header />
-            <SideBar />
             <SlideShow />
             <div className="">
                 <div className="bg-[#4298b4] mt-8">

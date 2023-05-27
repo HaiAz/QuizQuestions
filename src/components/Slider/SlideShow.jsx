@@ -12,7 +12,10 @@ export default function SlideShow() {
             <Slider {...settingSlideShow}>
                 {dataSlider.map((item) => {
                     return (
-                        <div key={item.id} className="px-2 py-2">
+                        <div
+                            key={item.id}
+                            className="px-2 py-2 cursor-pointer border-none outline-none"
+                        >
                             <img
                                 src={item.linkImg}
                                 alt={item.title}

@@ -26,7 +26,6 @@ function ListExam() {
         description: "",
     });
 
-    const currentTime = new Date().getTime();
     const dispatch = useDispatch();
     const userSlice = useSelector((state) => state.authSlice.user);
 
@@ -89,17 +88,10 @@ function ListExam() {
             const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${examID}`);
             const exam = await getDoc(examRef);
             const user = await getDoc(userRef);
+            const currentTime = new Date().getTime();
 
             dispatch(setPageLoading(30));
             setLoading(examID);
-
-            //check có đủ tiền hay không
-            if (+user.data().coin < +coin) {
-                alert("Bạn không đủ coin để làm bài thi này!");
-                setLoading("");
-                dispatch(setPageLoading(100));
-                return;
-            }
 
             //check có đang làm bài thi khác hay không
             if (
@@ -118,6 +110,13 @@ function ListExam() {
                 return;
             }
 
+            //check có đủ tiền hay không
+            if (+user.data().coin < +coin) {
+                alert("Bạn không đủ coin để làm bài thi này!");
+                setLoading("");
+                dispatch(setPageLoading(100));
+                return;
+            }
             //tạo lịch sử làm bài
             await setDoc(historyRef, {
                 ...exam.data(),
@@ -148,7 +147,7 @@ function ListExam() {
 
             //update trạng thái user
             await updateDoc(userRef, { isTakingTest, coin: +user.data().coin - +coin });
-            dispatch(setUser({ ...user.data(), isTakingTest }));
+            dispatch(setUser({ ...userSlice, isTakingTest }));
             dispatch(setPageLoading(100));
             window.location.href = `/user/test/${examID}`;
             // window.location.reload();
@@ -215,7 +214,7 @@ function ListExam() {
                     })}
                 </div>
             )}
-            {/* <isOpenModal isOpen={isOpenModal} closeModal={closeModal} modalContent={modalContent} /> */}
+            <NotiModal isOpen={isOpenModal} closeModal={closeModal} modalContent={modalContent} />
         </>
     );
 }

@@ -23,7 +23,7 @@ export default function SubjectSlideShow() {
                 {dataSubject.map((item) => {
                     return (
                         <div key={item.id} className=" px-2 py-2">
-                            <div className="border-black border-[1px] border-l-0 first:border-l-[1px] py-4">
+                            <div className="border-black border-[1px] border-l-0 first:border-l-[1px] py-4 cursor-pointer">
                                 <div className="flex items-center px-2">
                                     <img
                                         src={item.linkImg}
