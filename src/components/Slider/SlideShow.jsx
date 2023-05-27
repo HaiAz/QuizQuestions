@@ -14,7 +14,7 @@ export default function SlideShow() {
                     return (
                         <div
                             key={item.id}
-                            className="px-2 py-2 cursor-pointer border-none outline-none"
+                            className="px-2 py-2 cursor-pointer border-none outline-none font-OleoScript font-semibold text-3xl"
                         >
                             <img
                                 src={item.linkImg}

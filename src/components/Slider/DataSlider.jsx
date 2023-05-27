@@ -1,49 +1,49 @@
 export const dataSlider = [
     {
         id: 1,
-        title: "Say something...",
+        title: "System of views and ideas of Ho Chi Minh",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398375678980156/hinh-anh-dep-ve-hoc-tap-y-nghia-2.png",
     },
     {
         id: 2,
-        title: "Say something...",
+        title: "Waiting for the sunny day...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398373321789450/anh-bia-chat.png",
     },
     {
         id: 3,
-        title: "Say something...",
+        title: "No pain, no gain...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398373678297088/anh-bia-facebook-dep-2020-8-696x258.webp",
     },
     {
         id: 4,
-        title: "Say something...",
+        title: "Over thinker but can't think during an exam",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398374240321568/anh-bia-facebook-ve-hoc-tap-dep-1.jpg",
     },
     {
         id: 5,
-        title: "Say something...",
+        title: "Don't let your dreams just be dreams...",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398374538137671/anh-nen-facebook-timeline-dep-27.jpg",
     },
     {
         id: 6,
-        title: "Say something...",
+        title: "Life is not about waiting for the storm to pass, it's about learning to dance in the rain.",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398375116931132/background-de-tai-hoc-tap_090657486.jpg",
     },
     {
         id: 7,
-        title: "Say something...",
+        title: "Keep calm and stay home",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398375397970021/goc-hoc-tap-cho-tre-e295.png",
     },
     {
         id: 8,
-        title: "Say something...",
+        title: "How far is forever.",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398373036556328/1671584185_67_77-Anh-Bia-Cover-Anh-Bia-Facebook-Cover-Anime-Cute.jpg",
     },
@@ -109,56 +109,65 @@ export const settingSlideShow = {
 export const dataSubject = [
     {
         id: 1,
-        title: "1",
-        description: "Description",
+        title: "Đỗ Văn Quang",
+        description:
+            "Xin gửi lời cảm ơn đến thầy Lê Đức Hải - giáo viên bộ môn văn. Cảm ơn thầy đã dẫn lối, soi sáng cho em",
         linkImg: "https://cdn-icons-png.flaticon.com/512/924/924915.png",
     },
     {
         id: 2,
-        title: "2",
-        description: "Description",
+        title: "Trần Bảo Trung",
+        description:
+            "Cảm các thầy cô đã đồng hành cùng em trong các năm học. Em là học sinh khối B, không đi học thêm nhưng điểm Lý em rất tốt",
         linkImg: "https://cdn-icons-png.flaticon.com/512/2042/2042898.png",
     },
     {
         id: 3,
-        title: "3",
-        description: "Description",
+        title: "Nguyễn Ngọc Hải",
+        description:
+            "Em cảm ơn sir Alex đã đồng hành cùng em. Mỗi bài giảng chiến thuật của thầy đều vô cùng dễ hiểu.",
         linkImg: "https://cdn-icons-png.flaticon.com/512/1785/1785896.png",
     },
     {
         id: 4,
-        title: "4",
-        description: "Description",
+        title: "Nguyễn Tuấn Minh",
+        description:
+            "Em xin chân thành cảm ơn thầy Lê Đức Hải, thầy Nguyễn Ngọc Hải đã giúp đỡ em.",
         linkImg: "https://cdn-icons-png.flaticon.com/512/2423/2423830.png",
     },
     {
         id: 5,
-        title: "5",
-        description: "Description",
+        title: "Khải Trịnh",
+        description:
+            "Em xin gửi lời cảm ơn sâu sắc đến thầy Nguyễn Quốc Chí, hững bài giảng tỉ mỉ, chăm chút của thầy vô cùng dễ hiểu.",
         linkImg: "https://cdn-icons-png.flaticon.com/512/4532/4532510.png",
     },
     {
         id: 6,
-        title: "6",
-        description: "Description",
+        title: "Nghĩa Bùi",
+        description:
+            "Em gửi lời cảm ơn tới thầy Phạm Thanh Tùng dạy môn Hóa đã giúp em từ HS khá môn hóa đạt được 9.25.",
         linkImg: "https://cdn-icons-png.flaticon.com/512/706/706831.png",
     },
     {
         id: 7,
-        title: "7",
-        description: "Description",
+        title: "Đạt Bùi",
+        description:
+            "Em cảm ơn thầy Hải đã đồng hành cùng em. Cảm ơn các anh chị đã giúp em giải đáp mọi câu hỏi.",
         linkImg: "https://cdn-icons-png.flaticon.com/512/1674/1674291.png",
     },
     {
         id: 8,
-        title: "8",
-        description: "Description",
+        title: "Cảnh Lê",
+        description:
+            "Những bài giảng của cô đã mở mang kiến thức cho em, hiểu sâu sắc về lịch sử dân tộc ta.",
         linkImg: "https://cdn-icons-png.flaticon.com/512/2335/2335153.png",
     },
     {
         id: 9,
-        title: "9",
-        description: "Description",
+        title: "Kiên Lê",
+        description:
+            "Với những video bài giảng hay mà không nhàm chán, thầy coo đã truyền cho em động lực và kinh nghiệm khi học toán.",
         linkImg: "https://cdn-icons-png.flaticon.com/512/547/547420.png",
     },
 ];

@@ -77,7 +77,10 @@ function ListExam() {
     };
 
     //close modal
-    const closeModal = useCallback(() => setIsOpenModal(false), []);
+    const closeModal = useCallback(() => {
+        setIsOpenModal(false);
+        setShow(false);
+    }, []);
 
     //Khi ấn làm bài
     const startExam = async (examID, coin) => {
@@ -98,7 +101,13 @@ function ListExam() {
                 userSlice?.isTakingTest?.status === true &&
                 userSlice?.isTakingTest?.examID !== examID
             ) {
-                alert("Bạn đang làm một bài kiểm tra khác!");
+                setIsOpenModal(true);
+                setModalContent({
+                    title: "Thông báo!",
+                    description:
+                        "Bạn đang làm một bài kiểm tra khác. Vui lòng hoàn thành bài trước đó!",
+                });
+                setShow(true);
                 setLoading("");
                 dispatch(setPageLoading(100));
                 return;
