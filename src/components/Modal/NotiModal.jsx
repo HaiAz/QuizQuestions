@@ -3,11 +3,6 @@ import React, { Fragment, memo } from "react";
 function NotiModal({ isOpen, closeModal, modalContent }) {
     return (
         <Fragment>
-            {/* The button to open modal */}
-            {/* <label htmlFor="my-modal-6" className="btn">
-                open modal
-            </label> */}
-            {/* Put this part before </body> tag */}
             <input type="checkbox" id="my-modal-6" className="modal-toggle" />
             <div className={`modal modal-bottom sm:modal-middle ${isOpen && "modal-open"}`}>
                 <div className="modal-box">
