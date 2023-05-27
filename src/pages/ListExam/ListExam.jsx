@@ -25,6 +25,7 @@ function ListExam() {
         title: "1",
         description: "",
     });
+    const [show, setShow] = useState(false);
 
     const dispatch = useDispatch();
     const userSlice = useSelector((state) => state.authSlice.user);
@@ -39,9 +40,8 @@ function ListExam() {
         getUserInfo();
     }, []);
 
+    //Lấy danh sách bài kiểm tra
     useEffect(() => {
-        //Lấy danh sách bài kiểm tra
-
         const examRef = collection(db, `exams/${id}/exams`);
         const getExam = async () => {
             try {
@@ -112,7 +112,12 @@ function ListExam() {
 
             //check có đủ tiền hay không
             if (+user.data().coin < +coin) {
-                alert("Bạn không đủ coin để làm bài thi này!");
+                setIsOpenModal(true);
+                setModalContent({
+                    title: "Thông báo!",
+                    description: "Bạn không đủ coin để làm bài thi này. Vui lòng nạp thêm coin.",
+                });
+                setShow(true);
                 setLoading("");
                 dispatch(setPageLoading(100));
                 return;
@@ -214,7 +219,12 @@ function ListExam() {
                     })}
                 </div>
             )}
-            <NotiModal isOpen={isOpenModal} closeModal={closeModal} modalContent={modalContent} />
+            <NotiModal
+                isOpen={isOpenModal}
+                closeModal={closeModal}
+                modalContent={modalContent}
+                isShow={show}
+            />
         </>
     );
 }
