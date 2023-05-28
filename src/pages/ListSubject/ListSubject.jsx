@@ -115,7 +115,7 @@ function ListSubject() {
                         </div>
                     );
                 })}
-                {user?.isTakingTest.status && (
+                {user?.isTakingTest?.status && (
                     <div className="toast toast-top toast-end top-16 right-10">
                         <div className="alert bg-base-300 rounded-3xl">
                             <div className="flex font-mono font-semibold items-center">

@@ -230,7 +230,7 @@ function ExamResult() {
 
                         <div className="mt-10 pt-4 mx-auto shadow-sm">
                             <button
-                                className="btn btn-outline btn-info"
+                                className="btn btn-outline btn-ghost"
                                 onClick={() => navigate("/user/exam-history")}
                             >
                                 Quay lại

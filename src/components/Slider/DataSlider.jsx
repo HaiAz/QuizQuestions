@@ -49,7 +49,7 @@ export const dataSlider = [
     },
     {
         id: 9,
-        title: "Say something...",
+        title: "If you can dream it, you can achive it.",
         linkImg:
             "https://cdn.discordapp.com/attachments/941695759764553778/1110398375926452294/Hoc-tap-700.jpg",
     },
