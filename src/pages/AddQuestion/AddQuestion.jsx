@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import NotiModal from "../../components/Modal/NotiModal";
 import { useAppContext } from "../../context/AppProvider";
 import { addDoc, collection } from "firebase/firestore";
-import { auth, db } from "../../firebase/config";
+import { db } from "../../firebase/config";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { BsInfoCircle } from "react-icons/bs";
 
 export default function AddQuestion() {
+    const handleResize = useWindowSize();
     const [question, setQuestion] = useState("");
     const [answer1, setAnswer1] = useState("");
     const [answer2, setAnswer2] = useState("");
@@ -15,9 +18,18 @@ export default function AddQuestion() {
     const [subject, setSubject] = useState();
     const [className, setClassName] = useState("");
     const [suggest, setSuggest] = useState("");
-    const handleResize = useWindowSize();
+    const [isOpen, setIsOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({
+        title: "",
+        description: "",
+    });
+    const [show, setShow] = useState(false);
+    const closeModal = useCallback(() => setIsOpen(false), []);
+
+    //Thêm câu hỏi vào csdl
     const addQuestion = async () => {
         try {
+            setShow(true);
             const questionRef = collection(db, `questions/${subject}/questions`);
             await addDoc(questionRef, {
                 question,
@@ -36,7 +48,14 @@ export default function AddQuestion() {
             setCorrectAnswer("");
             setClassName("");
             setSuggest("");
-            alert("Thêm thành công!");
+            // setIsOpen(true);
+            // setModalContent({
+            //     title: "Thông báo",
+            //     description: "Thêm thành công câu hỏi.",
+            // });
+            setTimeout(() => {
+                setShow(false);
+            }, 5000);
         } catch (err) {
             throw err;
         }
@@ -169,22 +188,39 @@ export default function AddQuestion() {
                     </select>
                 </div>
 
-                <div className="form-control w-full max-w-xs mx-4 my-2 py-2">
-                    <label className="label">
-                        <span className="label-text font-bold">Lớp</span>
-                    </label>
-                    <input
-                        value={className}
+                <div className="mx-2 my-2 px-2 py-2 w-full ">
+                    <select
+                        defaultValue={"DEFAULT"}
+                        className="select select-secondary w-full max-w-xs text-center font-semibold font-mono"
                         onChange={(e) => setClassName(e.target.value)}
-                        type="text"
-                        placeholder="Nhập tên lớp"
-                        className="input input-bordered w-full max-w-xs input-secondary"
-                    />
+                    >
+                        <option value="DEFAULT" disabled selected hidden>
+                            Chọn lớp
+                        </option>
+                        <option value={"10"}>10</option>
+                        <option value={"11"}>11</option>
+                        <option value={"12"}>12</option>
+                    </select>
                 </div>
 
                 <button className="btn mx-4 my-2 px-8 py-3 " onClick={addQuestion}>
                     Thêm
                 </button>
+            </div>
+            <NotiModal isOpen={isOpen} closeModal={closeModal} modalContent={modalContent} />
+            <div
+                className={`${
+                    show === true
+                        ? "toast toast-top toast-end top-20 right-10 transition duration-[5000] ease-in"
+                        : "toast toast-top toast-end top-20 right-10 transition translate-x-96"
+                }`}
+            >
+                <div className="alert bg-green-300 text-lg font-mono text-green-800">
+                    <div>
+                        <BsInfoCircle className="text-2xl" />
+                        <span>Thêm câu hỏi thành công!</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

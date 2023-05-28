@@ -1,14 +1,12 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector } from "react-redux";
 import { MdAccountCircle } from "react-icons/md";
-import { db } from "../../firebase/config";
-import { doc, onSnapshot, getDoc } from "firebase/firestore";
 import { BsCoin } from "react-icons/bs";
+
 function Header() {
-    const [userData, setUserData] = useState();
     const { handleLogout } = useAuthContext();
     const { navbarTitle } = useAppContext();
     const checkAuth = useSelector((state) => state.authSlice.auth);

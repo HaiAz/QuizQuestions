@@ -3,8 +3,6 @@ import SubjectSlideShow from "../../components/Slider/SubjectSlideShow";
 import Header from "../../components/Header/Header";
 import SlideShow from "../../components/Slider/SlideShow";
 import Footer from "../../components/Footer/Footer";
-import Toast from "../../components/Toast/Toast";
-import { doc, getDoc } from "firebase/firestore";
 import { useAppContext } from "../../context/AppProvider";
 import { Link } from "react-router-dom";
 

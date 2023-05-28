@@ -1,25 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Countdown from "../../components/Countdown/Countdown";
+import CheckModal from "../../components/Modal/CheckModal";
 import { AiOutlineFlag, AiFillFlag } from "react-icons/ai";
 import { HiOutlineArrowSmLeft, HiOutlineArrowSmRight } from "react-icons/hi";
 import { useParams, useNavigate } from "react-router-dom";
 import { db, auth } from "../../firebase/config";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../redux/authSlice";
 import { useAppContext } from "../../context/AppProvider";
 import { getDoc, doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 
 export default function Quizz() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const [currentQuestion, setCurrentQuestion] = useState(1);
     const [listQuestion, setListQuestion] = useState();
     const [filterQuestion, setFilterQuestion] = useState(listQuestion);
     const { setNavTitle } = useAppContext();
-    const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
+    const dispatch = useDispatch();
     const user = useSelector((state) => state.authSlice.user);
     const currentTime = new Date().getTime() / 1000;
+    const [isOpen, setIsOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({
+        title: "",
+        description: "",
+    });
+
     // Đang làm bài này thì không nhảy sang làm bài khác được
     useEffect(() => {
         if (user?.isTakingTest.examID !== id) {
@@ -30,6 +35,7 @@ export default function Quizz() {
 
     //Lấy danh sách câu hỏi bài kiểm tra
     useEffect(() => {
+        const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
         const unsubcribe = onSnapshot(historyRef, (doc) => {
             if (doc.exists()) {
                 setListQuestion({ ...doc.data() });
@@ -101,6 +107,7 @@ export default function Quizz() {
 
     //Set dữ liệu ban đầu cho filterQuestion
     useEffect(() => {
+        const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
         const getData = async () => {
             const docSnap = await getDoc(historyRef);
             if (docSnap.exists()) {
@@ -131,7 +138,17 @@ export default function Quizz() {
         }
     };
 
-    // nộp bài
+    const beforeFinish = () => {
+        setIsOpen(true);
+        setModalContent({
+            title: "Thông báo",
+            description: "Bạn có chắc muốn nộp bài không?",
+        });
+    };
+
+    const closeModal = useCallback(() => setIsOpen(false), []);
+
+    //Nộp bài
     const finish = async () => {
         const userRef = doc(db, "users", `${auth.currentUser.uid}`);
         const historyRef = doc(db, "histories", `${auth.currentUser.uid}/exams/${id}`);
@@ -280,11 +297,17 @@ export default function Quizz() {
                 </div>
 
                 <div className="mt-10 pt-4 mx-auto shadow-sm">
-                    <button className="btn btn-outline btn-info" onClick={() => finish()}>
+                    <button className="btn btn-outline btn-info" onClick={() => beforeFinish()}>
                         Nộp bài
                     </button>
                 </div>
             </div>
+            <CheckModal
+                isOpen={isOpen}
+                closeModal={closeModal}
+                modalContent={modalContent}
+                confirm={finish}
+            />
         </div>
     );
 }

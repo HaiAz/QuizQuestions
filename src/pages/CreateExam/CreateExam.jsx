@@ -1,7 +1,8 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/config";
 import { where, getDocs, addDoc, collection } from "firebase/firestore";
 import { useAppContext } from "../../context/AppProvider";
+import { BsInfoCircle } from "react-icons/bs";
 function CreateExam() {
     const [examName, setExamName] = useState(null);
     const [time, setTime] = useState(null);
@@ -9,8 +10,8 @@ function CreateExam() {
     const [subject, setSubject] = useState(null);
     const [className, setClassName] = useState(null);
     const [coin, setCoin] = useState(null);
-
     const { setNavTitle } = useAppContext();
+    const [show, setShow] = useState(false);
     useEffect(() => {
         setNavTitle("Tạo đề thi");
     }, []);
@@ -18,6 +19,7 @@ function CreateExam() {
     const examRef = collection(db, "exams", `${subject}/exams`);
     const onCreateExam = async () => {
         try {
+            setShow(true);
             const exam = [];
             const querySnapshot = await getDocs(
                 collection(db, "questions", `${subject}/questions`),
@@ -38,7 +40,9 @@ function CreateExam() {
                 coin,
                 question: [...exam].sort(() => -0.5 + Math.random()).slice(0, numberQuestion),
             }).then(() => {
-                alert("Thêm thành công");
+                setTimeout(() => {
+                    setShow(false);
+                }, 5000);
             });
         } catch (err) {
             throw err;
@@ -142,6 +146,20 @@ function CreateExam() {
             >
                 Thêm đề thi
             </button>
+            <div
+                className={`${
+                    show === true
+                        ? "toast toast-top toast-end top-20 right-10 transition duration-[5000] ease-in"
+                        : "toast toast-top toast-end top-20 right-10 transition translate-x-96"
+                }`}
+            >
+                <div className="alert bg-green-300 text-lg font-mono text-green-800">
+                    <div>
+                        <BsInfoCircle className="text-2xl" />
+                        <span>Tạo đề thi thành công!</span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

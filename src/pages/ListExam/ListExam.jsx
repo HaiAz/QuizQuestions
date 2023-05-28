@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { auth, db } from "../../firebase/config";
 import { getDocs, doc, collection, where, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/authSlice";
 import { useAppContext } from "../../context/AppProvider";
@@ -212,6 +211,10 @@ function ListExam() {
                                         <button
                                             className={`btn btn-primary ${
                                                 loading === item.id && "loading"
+                                            } ${
+                                                userSlice?.isTakingTest?.examID === item.id
+                                                    ? "bg-red-600 outline-none border-none hover:bg-red-400"
+                                                    : ""
                                             }`}
                                             onClick={() => startExam(item.id, item.coin)}
                                         >

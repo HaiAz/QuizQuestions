@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppProvider";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { BsCoin } from "react-icons/bs";
 function Profile() {
     const userInfo = useSelector((state) => state.authSlice.user);

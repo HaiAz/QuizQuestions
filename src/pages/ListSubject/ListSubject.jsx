@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Toast from "../../components/Toast/Toast";
 import Countdown from "../../components/Countdown/Countdown";
-import { doc, getDocument, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppProvider";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, db } from "../../firebase/config";
+import { db } from "../../firebase/config";
 import { setUser } from "../../redux/authSlice";
 
 function ListSubject() {
-    const [show, setShow] = useState(true);
     const [listQuestion, setListQuestion] = useState();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -107,7 +105,10 @@ function ListSubject() {
                             <div className="card-body items-center text-center">
                                 <h2 className="card-title">{item.name}</h2>
                                 <div className="card-actions">
-                                    <Link to={`/user/exam/${item.id}`} className="btn btn-primary">
+                                    <Link
+                                        to={`/user/exam/${item.id}`}
+                                        className="btn btn-primary transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+                                    >
                                         Challenge me!
                                     </Link>
                                 </div>
